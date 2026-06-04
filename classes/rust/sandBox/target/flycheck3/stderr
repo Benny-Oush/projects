@@ -1,0 +1,62 @@
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+   0.043795300s  INFO prepare_target{force=false package_id=classes v0.1.0 (C:\projects\rust\sandBox) target="classes"}: cargo::core::compiler::fingerprint: fingerprint error for classes v0.1.0 (C:\projects\rust\sandBox)/Check { test: false }/TargetInner { name: "classes", doc: true, ..: with_path("C:\\projects\\rust\\sandBox\\src\\main.rs", Edition2024) }
+   0.043837500s  INFO prepare_target{force=false package_id=classes v0.1.0 (C:\projects\rust\sandBox) target="classes"}: cargo::core::compiler::fingerprint:     err: failed to read `C:\projects\rust\sandBox\target\debug\.fingerprint\classes-58f22752604b5d20\bin-classes`
+
+Caused by:
+    The system cannot find the file specified. (os error 2)
+
+Stack backtrace:
+   0: git_midx_writer_dump
+   1: git_midx_writer_dump
+   2: git_midx_writer_dump
+   3: git_midx_writer_dump
+   4: git_filter_source_repo
+   5: git_filter_source_repo
+   6: git_filter_source_repo
+   7: git_filter_source_repo
+   8: git_filter_source_repo
+   9: git_filter_source_repo
+  10: git_filter_source_repo
+  11: git_libgit2_prerelease
+  12: <unknown>
+  13: <unknown>
+  14: <unknown>
+  15: <unknown>
+  16: git_midx_writer_dump
+  17: git_filter_source_repo
+  18: git_midx_writer_dump
+  19: BaseThreadInitThunk
+  20: RtlUserThreadStart
+   0.088698500s  INFO prepare_target{force=false package_id=classes v0.1.0 (C:\projects\rust\sandBox) target="classes"}: cargo::core::compiler::fingerprint: fingerprint error for classes v0.1.0 (C:\projects\rust\sandBox)/Check { test: true }/TargetInner { name: "classes", doc: true, ..: with_path("C:\\projects\\rust\\sandBox\\src\\main.rs", Edition2024) }
+   0.088724700s  INFO prepare_target{force=false package_id=classes v0.1.0 (C:\projects\rust\sandBox) target="classes"}: cargo::core::compiler::fingerprint:     err: failed to read `C:\projects\rust\sandBox\target\debug\.fingerprint\classes-571911ab79895894\test-bin-classes`
+
+Caused by:
+    The system cannot find the file specified. (os error 2)
+
+Stack backtrace:
+   0: git_midx_writer_dump
+   1: git_midx_writer_dump
+   2: git_midx_writer_dump
+   3: git_midx_writer_dump
+   4: git_filter_source_repo
+   5: git_filter_source_repo
+   6: git_filter_source_repo
+   7: git_filter_source_repo
+   8: git_filter_source_repo
+   9: git_filter_source_repo
+  10: git_filter_source_repo
+  11: git_libgit2_prerelease
+  12: <unknown>
+  13: <unknown>
+  14: <unknown>
+  15: <unknown>
+  16: git_midx_writer_dump
+  17: git_filter_source_repo
+  18: git_midx_writer_dump
+  19: BaseThreadInitThunk
+  20: RtlUserThreadStart
+    Checking classes v0.1.0 (C:\projects\rust\sandBox)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.18s

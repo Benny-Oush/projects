@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tasks</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>My Tasks</h1>
+    <form action="POST">
+        <input type="text" placeholder="Add a task">
+        <input type="hidden" value="add">
+        <button type="submit">Add</button>
+    </form>
+    <form>
+        <span>Sort by:</span>
+        <select>
+            <option value="date">Created</option>
+            <option value="status">Status</option>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+    <table>
+        <tr>
+            <th>Task</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+        <tr>
+            <td>Task 1</td>
+            <td>Pending</td>
+            <td>Today</td>
+            <td>
+                <button>Complete</button>
+                <button>Edit</button>
+                <button>Delete</button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

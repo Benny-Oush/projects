@@ -1,0 +1,12 @@
+C:\projects\rust\app\target\debug\deps\chacha20-46d480d6acb84cd4.d: C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\lib.rs C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\variants.rs C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\backends.rs C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\rng.rs C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\../README.md C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\backends\soft.rs C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\backends\avx2.rs C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\backends\sse2.rs
+
+C:\projects\rust\app\target\debug\deps\libchacha20-46d480d6acb84cd4.rmeta: C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\lib.rs C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\variants.rs C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\backends.rs C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\rng.rs C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\../README.md C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\backends\soft.rs C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\backends\avx2.rs C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\backends\sse2.rs
+
+C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\lib.rs:
+C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\variants.rs:
+C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\backends.rs:
+C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\rng.rs:
+C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\../README.md:
+C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\backends\soft.rs:
+C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\backends\avx2.rs:
+C:\Users\beni3\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\chacha20-0.10.0\src\backends\sse2.rs:

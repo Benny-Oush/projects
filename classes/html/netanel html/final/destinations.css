@@ -1,0 +1,219 @@
+:root {
+  --main-color: rgb(254, 129, 33);
+}
+
+* {
+  scroll-behavior: smooth;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  list-style: none;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.352);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.logo {
+  color: rgb(185, 34, 34);
+  font-size: 32px;
+  span {
+    color: var(--main-color);
+  }
+}
+.nav-list {
+  list-style-type: none;
+  display: flex;
+}
+
+li {
+  font-size: 18px;
+  padding-right: 25px;
+}
+
+li a:hover {
+  color: var(--main-color);
+}
+
+a {
+  text-decoration: none;
+  color: rgb(192, 26, 26);
+  font-weight: 550;
+}
+.nav-list #current-location a {
+  color: var(--main-color);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.hero {
+  background-color: rgb(248, 224, 173);
+  padding: 60px 60px 0;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 0 30px;
+  font-weight: 600;
+}
+
+.buttons div {
+  transition: all 0.3s ease;
+  border: 2px solid red;
+  border-radius: 25px;
+  padding: 10px 20px;
+}
+
+.buttons div:hover {
+  background-color: red;
+  color: rgb(248, 224, 173);
+}
+.imgs-container {
+  padding: 70px 20px;
+  text-align: center;
+}
+
+.imgs-container h1 {
+  color: var(--main-color);
+  padding-bottom: 45px;
+  font-size: 45px;
+  margin: 0;
+}
+
+.gallery-grid {
+  margin: 0 -25px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 10px;
+  margin-bottom: 60px;
+}
+
+.gallery-item {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 2px solid #f55925;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+.item-1 {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.item-2 {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.item-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  color: rgb(247, 164, 86);
+  transform: translateY(100%);
+  transition: all 0.3s ease;
+  p {
+    justify-self: start;
+    font-weight: 700;
+    font-size: 22px;
+  }
+}
+
+.gallery-item:hover .item-overlay {
+  transform: translateY(0);
+}
+
+.social-and-rights {
+  display: flex;
+  align-items: center;
+  background-color: rgb(180, 35, 35);
+  height: 130px;
+  color: black;
+  justify-content: space-between;
+}
+.info {
+  font-size: 18px;
+  padding-left: 45px;
+  h3 {
+    padding-bottom: 5px;
+    font-weight: 800;
+  }
+}
+.bott-icons {
+  padding-right: 45px;
+  i {
+    padding-left: 10px;
+    font-size: 23px;
+    color: black;
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    margin: 0 5px;
+  }
+
+  .item-1,
+  .item-2 {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .gallery-item {
+    height: 250px;
+  }
+
+  .hero {
+    padding: 120px 20px 0;
+  }
+
+  .buttons {
+    flex-wrap: wrap;
+  }
+
+  .nav {
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+  }
+  .nav-list {
+    justify-content: center;
+    margin-left: -45px;
+  }
+  
+  li {
+    padding: 5px 10px;
+  }
+}

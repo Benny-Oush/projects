@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab: DOM Basics</title>
+    <style>
+        body { font-family: sans-serif; transition: background 0.3s; padding: 20px; }
+        .dark-mode { background-color: #333; color: white; }
+        .box { border: 2px solid #ccc; padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .price-tag { color: gray; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <h1 id="main-title">DOM Basics Mission</h1>
+
+    <!-- Exercise 0: Simple Read/Write (No Events) -->
+    <div class="box">
+        <h2>Mission 0: Instant Updates</h2>
+        <p id="message">Original Message</p>
+        <p>Status: <span id="status">Pending...</span></p>
+        <div id="style-me" style="color: black;">This text will change color.</div>
+    </div>
+
+    <!-- Exercise 1: Dark Mode -->
+    <div class="box">
+        <h2>Mission 1: The Toggle</h2>
+        <button id="theme-toggle">Toggle Dark Mode</button>
+    </div>
+
+    <!-- Exercise 2: Counter -->
+    <div class="box">
+        <h2>Mission 2: The Counter</h2>
+        <p>Count: <span id="counter-value">0</span></p>
+        <button id="increment-btn">Increase +</button>
+        <button id="decrement-btn">Decrease -</button>
+    </div>
+
+    <!-- Exercise 3: Styling -->
+    <div class="box">
+        <h2>Mission 3: Price Highlighting</h2>
+        <ul>
+            <li class="price-tag" data-price="50">Product A - $50</li>
+            <li class="price-tag" data-price="120">Product B - $120</li>
+            <li class="price-tag" data-price="80">Product C - $80</li>
+        </ul>
+        <button id="highlight-btn">Highlight Expensive Items</button>
+    </div>
+
+    <script type="module" src="exercisesDOM.js"></script>
+</body>
+</html>

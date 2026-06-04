@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>The Input tag</h1>
+    <p>input is a tag used to receive a text input from the user</p>
+    <h3>The Type attribute</h3>
+    <p>Type is an attribute used to change tags' behaviors</p>
+    <h4>Here is some of the Type tags:</h4>
+    <ul>
+      <li>
+        <strong>text:</strong><br />
+        used to receive a text from the user
+      </li>
+      <li>
+        <strong>number:</strong><br />
+        used to receive a number from the user
+      </li>
+      <li>
+        <strong>color:</strong><br />
+        used to select a color
+      </li>
+      <li>
+        <strong>file:</strong><br />
+        used to select and upload a file
+      </li>
+      <li>
+        <strong>date:</strong><br />
+        used to select a certain dete
+      </li>
+      <li>
+        <strong>checkbox:</strong><br />
+        used to select a certain option
+      </li>
+      <li>
+        <strong>email:</strong><br />
+        used to receive an Email address from the user
+      </li>
+    </ul>
+    <h3>some more tags:</h3>
+    <ul>
+      <li>
+        <strong>placeholder:</strong><br />
+        shows an example of the requested input
+      </li>
+      <li>
+        <strong>value:</strong><br />
+        sets a default input value
+      </li>
+      <li>
+        <strong>min:</strong><br />
+        sets the lowest numeric value
+      </li>
+      <li>
+        <strong>max:</strong><br />
+        sets the highest numeric value
+      </li>
+      <li>
+        <strong>checked:</strong><br />
+        sets the checkbox to be selected by default
+      </li>
+      <li>
+        <strong>disabled:</strong><br />
+        disables the input tag
+      </li>
+    </ul>
+    <form>
+      <strong>Name: </strong>
+      <input type="text" placeholder="Enter your name: " required />
+      <br />
+      <br />
+      <strong>Email: </strong>
+      <input type="email" placeholder="Enter your Email address: " required />
+      <br />
+      <br />
+      <strong>Select your age: </strong>
+      <input
+        type="number"
+        min="18"
+        max="100"
+        step="10"
+        placeholder="18"
+        required
+      />
+      <br />
+      <br />
+      <strong>Select your gender: </strong><br />
+      <input type="radio" id="male" name="gender" value="male" required />
+      <label for="male">Male</label><br />
+
+      <input type="radio" id="female" name="gender" value="female" />
+      <label for="female">Female</label><br />
+
+      <input type="radio" id="other" name="gender" value="other" />
+      <label for="other">Other</label><br />
+      <br />
+      <strong>Select your favorite color: </strong>
+      <input type="color" />
+      <br /><br />
+
+      <strong>Upload your resume: </strong><br /><br />
+
+      <input type="file" />
+      <br /><br />
+      <input type="checkbox" required />
+      <strong>I agree to all terms of use.</strong>
+      <br /><br />
+      <input type="submit" />
+    </form>
+  </body>
+</html>
