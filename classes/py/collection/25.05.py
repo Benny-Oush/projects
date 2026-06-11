@@ -1,12 +1,15 @@
 def get_sums(arr):
     e_sum = 0
     o_sum = 0
-    for i in range(0, len(arr)):
+    for i in range(len(arr)):
         if i % 2 == 0:
             e_sum += arr[i]
         else:  
             o_sum += arr[i]
-    return e_sum, o_sum
+
+    result = e_sum - o_sum
+
+    return result if result > 0 else -result
 
 
 # def gcd(arr):
@@ -33,17 +36,25 @@ def get_sums(arr):
 #     return div
 
 
-# def get_prime_sum(arr):
-#     sum = 0
-#     for num in arr:
-#         is_prime = True
-#         for i in range(2, num-1):
-#             if num % i == 0:
-#                 is_prime = False
-#                 break
-#         if is_prime:
-#             sum += num
-#     return sum
+def get_prime_sum(arr):
+    total = 0
+
+    for num in arr:
+        if num < 2:
+            continue
+
+        is_prime = True
+
+        for i in range(2, int(num ** 0.5) + 1):
+            if num % i == 0:
+                is_prime = False
+                break
+
+        if is_prime:
+            total += num
+
+    return total
+
 
 # def get_largest_digit_sum(arr):
 #     largest = 0
@@ -279,10 +290,10 @@ def largest_prime(arr):
 
 
 # arr = [234, 12, 77, 833, 14988889, 959, 75, 77, 79, 80, 81, 60]
-arr = [1, 2, 3, 4, 5]
+arr = [30, 50, 7, 3, 19, 10]
 # arr = [6, 12, 18, 35, 70]
 # arr = [1, 2, 3, 3, 4, 3, 2, 6, 5, 4, 7, 9]
 
-# print(longest_sequence(arr))
+print(get_prime_sum(arr))
 
 
