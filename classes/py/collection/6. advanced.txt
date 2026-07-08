@@ -1,0 +1,86 @@
+1. Write a function that accepts a list of numbers and returns the difference between the sum of numbers at even indices and the sum of numbers at odd indices
+
+2. Write a function that accepts a list of numbers and returns the gcd of all numbers in the list
+
+3. Write a function that accepts a list of numbers and returns the sum of all prime numbers in the list
+
+4. Write a function that accepts a list of numbers and returns the number that has the largest sum of digits
+
+5. Write a function that accepts a list of numbers and returns True if every number in the list contains the digit 7
+
+6. Write a function that accepts a list of numbers and returns the number with the greatest number of divisors
+
+7. Write a function that accepts a list of numbers and returns the longest sequence of increasing consecutive elements
+
+8. Write a function that accepts a list of numbers and returns the sum of every even number whose index is also even
+
+9. Write a function that accepts a list of numbers and returns the average of all numbers divisible by 3
+
+10. Write a function that accepts a list of numbers and returns the largest difference between two neighboring elements
+
+---
+
+11. Write a function that accepts a list of numbers and returns True if the list is symmetric (reads the same forward and backward)
+
+12. Write a function that accepts a list of numbers and returns the first number whose sum of digits is even
+
+13. Write a function that accepts a list of numbers and returns the count of numbers that are divisible by the sum of their digits
+
+14. Write a function that accepts a list of numbers and returns a new list containing only numbers whose digits are all odd
+
+15. Write a function that accepts a list of numbers and returns the sum of all numbers that are coprime with the first element in the list
+
+16. Write a function that accepts a list of numbers and returns the index of the number with the largest product of digits
+
+17. Write a function that accepts a list of numbers and returns the longest sequence of equal consecutive numbers
+
+18. Write a function that accepts a list of numbers and returns True if every neighboring pair has gcd greater than 1
+
+19. Write a function that accepts a list of numbers and returns the number that appears the most times
+
+20. Write a function that accepts a list of numbers and returns the largest prime number that appears in the list
+
+---
+
+21. Write a function that accepts a string and returns the word with the greatest number of vowels
+
+22. Write a function that accepts a string and returns True if every word starts with an uppercase letter
+
+23. Write a function that accepts a string and returns the longest word that contains no digits
+
+24. Write a function that accepts a string and returns the number of words whose length is prime
+
+25. Write a function that accepts a string and returns the word with the largest number of distinct characters
+
+26. Write a function that accepts a string and returns the shortest word that appears more than once
+
+27. Write a function that accepts a string and returns True if every word contains at least one vowel
+
+28. Write a function that accepts a string and returns the longest palindrome word in the string
+
+29. Write a function that accepts a string and returns the number of pairs of neighboring equal characters
+
+30. Write a function that accepts a string and returns the character that appears most frequently
+
+---
+
+31. Write a function that accepts a list of strings and returns the longest string whose length is even
+
+32. Write a function that accepts a list of strings and returns the number of strings that contain only lowercase letters
+
+33. Write a function that accepts a list of strings and returns the string with the greatest number of digits
+
+34. Write a function that accepts a list of strings and returns True if every string contains at least one uppercase letter
+
+35. Write a function that accepts a list of strings and returns the total number of vowels in all strings combined
+
+36. Write a function that accepts a list of strings and returns the longest common prefix of all strings
+
+37. Write a function that accepts a list of strings and returns the pair of strings with the greatest difference in length
+
+38. Write a function that accepts a list of strings and returns the number of strings that are palindromes
+
+39. Write a function that accepts a list of strings and returns the string with the fewest distinct characters
+
+40. Write a function that accepts a list of strings and returns True if all strings have different lengths
+

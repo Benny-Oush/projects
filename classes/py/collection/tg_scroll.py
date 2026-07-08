@@ -1,7 +1,7 @@
 import time
 import pyautogui
 
-wait_time = 0.3
+wait_time = 300
 press_time = 2    
 
 text = "הסקריפט הכללי פעיל!"
@@ -13,8 +13,8 @@ while True:
     
     try:
         time.sleep(wait_time)
-        text = f"...למטה לחץ על {count} מס' לחיצות רצף מתחיל"
-        print(text)
+        
+        print(f"Starts pressing sequence number {count}")
 
         count += 1
         
@@ -23,8 +23,8 @@ while True:
         while time.time() < end_time:
             pyautogui.press('pagedown')
             time.sleep(0.01)
-        text = "להמתנה חוזר הסתיים. הלחיצות סבב"
-        print(text)
+      
+        print("the pressing round has ended successfully. Returning to standby mode.")
         
 
     except Exception as e:
