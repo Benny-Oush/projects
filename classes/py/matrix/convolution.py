@@ -168,30 +168,32 @@ matrix = [
 #         print(f'{item:3}', end=' ')
 #     print()
 
+
 def check_sudoku(sudoku):
-    for line in range(9):
-        if line % 3 == 0:
-            for small_block in range(0, 9, 3):
-                block_total = 0
-                for block_line in range(line, line + 3):
-                    for block_cell in range(small_block, small_block + 3):
-                        block_total += sudoku[block_line][block_cell]
-                if block_total != 45:
-                    return False
-        total = 0
-        for cell in range(9):
-            total += sudoku[line][cell]
-        if total != 45:
-            return False
-    for cell in range(9):
-        total = 0
-        for column in range(9):
-            total += sudoku[column][cell]
-        if total != 45:
-            return False
+    for i in range(9):
+        seen = []
+        seen2 =  []
+        for j in range(9):
+            num = sudoku[i][j]
+            num2 = sudoku[j][i]
+            if num in seen or num2 in seen2 or num < 1 or num > 9:
+                return False
+            seen.append(num)
+            seen2.append(num2)
+    
+    for i in range(0, 9, 3):
+        for j in range(0, 9, 3):
+            seen = []
+            for i2 in range(3):
+                for j2 in range(3):
+                    num = sudoku[i+i2][j+j2]
+                    if num in seen:
+                        return False
+                    seen.append(num)
     return True
 
 sudoku = [
+
     [5, 3, 4, 6, 7, 8, 9, 1, 2],
     [6, 7, 2, 1, 9, 5, 3, 4, 8],
     [1, 9, 8, 3, 4, 2, 5, 6, 7],
@@ -206,12 +208,63 @@ sudoku = [
 # print(check_sudoku(sudoku))
 
 
+def check_sequence(value, longest, tmp_longest):
+    if value == 0:
+        tmp_longest += 1
+        if tmp_longest > longest:
+            longest = tmp_longest
+    else:
+        tmp_longest = 0
+    
+    return longest, tmp_longest
+
+def matrix_sequence(matrix):
+    longest = 0
+
+    if not matrix or not matrix[0]:
+        return 'Matrix not valid'
+
+    for line in matrix:
+        if len(line) != len(matrix[0]):
+            return 'Matrix not valid'
+
+    if len(matrix) == len(matrix[0]):
+        tmp_longest = 0
+        for i in range(len(matrix)):
+            value = matrix[i][i]
+            longest, tmp_longest = check_sequence(value, longest, tmp_longest)
+
+        tmp_longest = 0
+        for i in range(len(matrix)):
+            value = matrix[i][len(matrix)-1-i]
+            longest, tmp_longest = check_sequence(value, longest, tmp_longest)
+
+
+    for line in range(len(matrix)):
+        tmp_longest = 0
+        for cell in range(len(matrix[line])):
+            value = matrix[line][cell]
+            longest, tmp_longest = check_sequence(value, longest, tmp_longest)
+
+ 
+    for cell in range(len(matrix[0])):
+        tmp_longest = 0
+        for column in range(len(matrix)):
+            value = matrix[column][cell]
+            longest, tmp_longest = check_sequence(value, longest, tmp_longest)
+
+
+    return longest
+
+
 
 matrix = [
-    [0, 8, 0, 0, 0],
-    [0, 8, 0, 7, 0],
-    [0, 0, 3, 0, 4],
-    [0, 0, 3, 4, 6],
-    [0, 0, 0, 4, 2]
+    [0, 2, 0, 0, 0, 5],
+    [0, 3, 0, 5, 0, 0],
+    [0, 0, 0, 3, 4, 5],
+    [5, 2, 3, 6, 4, 0],
+    [0, 0, 0, 2, 0, 0],
+    [0, 0, 5, 0, 0, 0]
 ]
-print(matrix_sequence(matrix))
+
+# print(matrix_sequence(matrix))

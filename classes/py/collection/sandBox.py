@@ -347,7 +347,7 @@ from pandas.util.version import Infinity
 # ]
 
 
-# def chek_for_A(string_list):
+# def check_for_A(string_list):
 #     valid_list_count = 0
 #     for string in string_list:
 #         if "AA" not in string:
@@ -359,7 +359,7 @@ from pandas.util.version import Infinity
 #                 valid_list_count += 1
 #     return valid_list_count
 #
-# result = chek_for_A(random_strings)
+# result = check_for_A(random_strings)
 # print(result)
 
 # string = "ABABABAB"
@@ -394,32 +394,23 @@ from pandas.util.version import Infinity
 #
 #
 # test_strings = [
-#     "ABABAB",
 #     "ABCDE",
 #     "AAAAAA",
-#     "XYZXYZXYZ",
-#     "AABBAA",
 #     "123123",
 #     "HELLO",
-#     "CDCDCDCD",
 #     "PYTHON",
 #     "AAAAA",
-#     "ABABAC",
 #     "10101010",
 #     "MISSISSIPPI",
 #     "ABCABCABCABC",
 #     "Z",
-#     "XYXY",
 #     "APPLE",
-#     "HAHAAHA",
-#     "SOSOSOS",
 #     "WOW",
 #     "abcabc",
 #     "12345678",
-#     "MIMOMIMO"
 # ]
 #
-# def check_for_not_divisibles(strings):
+# def check_for_not_divisible(strings):
 #     not_divisible = []
 #     for string in strings:
 #         is_not_divisible = True
@@ -435,7 +426,7 @@ from pandas.util.version import Infinity
 #         if is_not_divisible:
 #             not_divisible.append(string)
 #     return not_divisible
-# print(check_for_not_divisibles(test_strings))
+# print(check_for_not_divisible(test_strings))
 
 
 

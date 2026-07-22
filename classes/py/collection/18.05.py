@@ -86,7 +86,7 @@ def longest_vowels_sequence(txt):
     return longest
 
 
-def reverve_str(txt):
+def reverse_str(txt):
     new_string = ''
     for i in range(len(txt) -1, -1, -1):
         new_string += txt[i]

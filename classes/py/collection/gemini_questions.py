@@ -102,7 +102,7 @@ def analyze_grades(grades=['']):
     stats['average'] /= len(grades)
     return stats
 
-res = analyze_grades(['Benny', 71, 90, 85])
+# res = analyze_grades(['Benny', 71, 90, 85])
 # print(res)
 
 def analyze_numbers(numbers):
@@ -128,30 +128,30 @@ def analyze_numbers(numbers):
     stats['average'] /= len(numbers)
     return stats
 
-with open("input.txt", "r") as file:
-    contant = file.read().lower()
+# with open("input.txt", "r") as file:
+#     contant = file.read().lower()
 
-words = []
+# words = []
 
-current = ''
-noise = '!@#$%^&*()_+?~{[]}|.,:;=></\\\n\t- '
+# current = ''
+# noise = '!@#$%^&*()_+?~{[]}|.,:;=></\\\n\t- '
 
-for char in contant:
-    if char in noise:
-        if current:
-            words.append(current)
-        current = ''
-    else:
-        current += char
+# for char in contant:
+#     if char in noise:
+#         if current:
+#             words.append(current)
+#         current = ''
+#     else:
+#         current += char
 
-words_dic = {}
+# words_dic = {}
 
-for word in words:
-    words_dic[word] = words_dic.get(word, 0) + 1
+# for word in words:
+#     words_dic[word] = words_dic.get(word, 0) + 1
 
 
-sorted_items = sorted(words_dic.items(), key=lambda x: x[1], reverse=True)
-top_five = sorted_items[:5]
+# sorted_items = sorted(words_dic.items(), key=lambda x: x[1], reverse=True)
+# top_five = sorted_items[:5]
 # print(top_five)
 
 # print('--- Stasistics ---')
@@ -160,3 +160,81 @@ top_five = sorted_items[:5]
 # print(f'The most common words:')
 # for word in top_five:
 #     print(f'"{word[0]}": {word[1]}')
+
+import json
+import datetime
+import random
+def write_log():
+    levels = ["INFO", "WARNING", "ERROR", "CRITICAL"]
+    services = ["auth_service", "payment_gateway", "database_cluster"] 
+    info_messages = ["User login successful", "Connection timeout", "Query executed in 45ms"]
+
+    line = {
+        'timestep': datetime.datetime.now(),
+        'level': random.choice(levels),
+        'service': random.choice(services),
+        'message': ''
+    }
+
+    for _ in range(15):
+        line['timestep'] = str(datetime.datetime.now())
+        line['level'] = random.choice(levels)
+        line['service'] = random.choice(services)
+        if line['level'] == 'WARNING':
+            line['message'] == 'Missing login info'
+        elif line['level'] == 'CRITICAL':
+            line['message'] == f'{line['service']} database access dinied'
+        elif line['level'] == 'ERROR':
+            line['message'] = 'Admin login failed'
+        else:
+            line['message'] = random.choice(info_messages)
+
+        with open("app.log", "a") as file:
+            file.write(f'{json.dumps(line)}\n')
+
+def analyes_log(log_file):
+    stats = {
+        'services': {
+            'auth_service': 0,
+            'payment_gateway': 0,
+            'database_cluster': 0
+        },
+        'levels': {
+            'WARNING': 0,
+            'ERROR': 0,
+            'CRITICAL': 0,
+            'INFO': 0 
+        },
+        'high_level_messages': []
+    }
+    
+    with open(log_file, 'r', encoding='utf-8') as file:
+        for line in file:
+            line = line.strip()
+            if not line:
+                continue
+                
+            try:
+                log_data = json.loads(line)
+            except json.JSONDecodeError:
+                print(f"Warning: Skipped invalid log line -> {line}")
+                continue
+
+            service = log_data.get('service')
+            if service in stats['services']:
+                stats['services'][service] += 1
+
+            level = log_data.get('level')
+            if level in stats['levels']:
+                stats['levels'][level] += 1
+                
+                if level in ('ERROR', 'CRITICAL'):
+                    stats['high_level_messages'].append({
+                        'service': service,
+                        'time': log_data.get('timestamp'),
+                        'message': log_data.get('message') 
+                    })
+
+    most_noisy_service = max(stats['services'], key=stats['services'].get)
+    
+    return most_noisy_service, stats['levels'], stats['high_level_messages']
