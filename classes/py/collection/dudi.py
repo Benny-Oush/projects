@@ -5,12 +5,6 @@ def matrix_sum(matrix):
             total += matrix[i][j]
     return total
 
-def check_if_symmetrical(matrix):
-    for i in range(len(matrix)):
-        for j in range(len(matrix[i])):
-            if matrix[i][j] != matrix[j][i]:
-                return False
-    return True
 
 def order_diagonal(matrix):
     for i in range(len(matrix)):
@@ -105,8 +99,21 @@ def check_for_sad_num(mat):
         print('There is no sad two digit number')
 
 
+def check_if_symmetrical(matrix):
+    for i in range(len(matrix) - 1):
+        for j in range(i + 1, len(matrix[i])):
+            if matrix[i][j] != matrix[j][i]:
+                return False
+    return True
 
+# print(check_if_symmetrical(mat2))
 
+mat2 = [
+    [3, 4, 5, 9],
+    [4, 5, 0, 8],
+    [5, 0, 1, 2],
+    [9, 8, 2, 7]
+]
 mat = [
     [5,  4,  1,  0,   0, 3],
     [1, 10,  7,  1, 123, 3],
@@ -117,11 +124,4 @@ mat = [
 
 arr = [5, 12, 4, 15]
 
-mat2 = [
-    [4, 9, 3, 2],
-    [7, 2, 6, 0],
-    [1, 5, 5, 3],
-    [2, 0, 6, 0]
-]
-check_for_sad_num(mat)
 

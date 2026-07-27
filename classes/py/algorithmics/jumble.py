@@ -137,7 +137,6 @@ def check_jumble(jumble, words):
 print(check_jumble(jumble1, words1))
 
 
-
 def check_direction(jumble, word, i, j, di, dj):
     for k in range(2, len(word)):
         i, j = i + di, j + dj
@@ -180,7 +179,6 @@ def check_jumble_2(jumble, words):
 
 
 # print(check_jumble_2(jumble1, words1))
-
 
 
 def check_layer_number(mat, layer_number):
@@ -257,4 +255,3 @@ mat = [
 #         print()
 # else:
 #     print('Invalid layer number')
-
