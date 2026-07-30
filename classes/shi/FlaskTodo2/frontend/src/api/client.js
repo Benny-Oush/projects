@@ -43,6 +43,12 @@ export const todosApi = {
       body: JSON.stringify({ complete }),
     }),
 
+  setPriority: (id, priority) =>
+    request(`/todos/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ priority }),
+    }),
+
   remove: (id) =>
     request(`/todos/${id}`, {
       method: 'DELETE',

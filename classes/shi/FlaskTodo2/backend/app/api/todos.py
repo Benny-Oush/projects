@@ -15,9 +15,11 @@ bp = Blueprint("todos", __name__, url_prefix="/api/todos")
 
 @bp.get("")
 def list_todos():
-    """GET /api/todos -> 200, all todos ordered by id."""
+    """GET /api/todos -> 200, all todos ordered by priority then id."""
     # SQLAlchemy 2.x style: select() + session.scalars() rather than Query.all().
-    todos = db.session.scalars(db.select(Todo).order_by(Todo.id)).all()
+    todos = db.session.scalars(
+        db.select(Todo).order_by(Todo.priority.desc(), Todo.id),
+    ).all()
     return jsonify([t.to_dict() for t in todos]), 200
 
 
@@ -29,7 +31,22 @@ def create_todo():
     if not title:
         abort(400, description="title is required and must be non-empty")
 
-    todo = Todo(title=title, complete=bool(data.get("complete", False)))
+    priority = data.get("priority")
+    if priority is not None:
+        try:
+            priority = int(priority)
+        except (TypeError, ValueError):
+            abort(400, description="priority must be an integer")
+        if priority < 0:
+            abort(400, description="priority must be a non-negative integer")
+    else:
+        priority = 0
+
+    todo = Todo(
+        title=title,
+        complete=bool(data.get("complete", False)),
+        priority=priority,
+    )
     db.session.add(todo)
     db.session.commit()
     return jsonify(todo.to_dict()), 201
@@ -54,6 +71,15 @@ def update_todo(todo_id):
 
     if "complete" in data:
         todo.complete = bool(data["complete"])
+
+    if "priority" in data:
+        try:
+            priority = int(data["priority"])
+        except (TypeError, ValueError):
+            abort(400, description="priority must be an integer")
+        if priority < 0:
+            abort(400, description="priority must be a non-negative integer")
+        todo.priority = priority
 
     db.session.commit()
     return jsonify(todo.to_dict()), 200

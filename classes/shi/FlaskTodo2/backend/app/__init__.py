@@ -8,6 +8,7 @@ sidesteps the import cycles a global ``app`` object tends to cause.
 import os
 
 from flask import Flask, jsonify
+from sqlalchemy import inspect, text
 
 from .config import config_map
 from .extensions import db, migrate, cors
@@ -35,6 +36,16 @@ def create_app(config_name=None):
     # Create tables that don't exist yet (idempotent — safe on every restart).
     with app.app_context():
         db.create_all()
+        inspector = inspect(db.engine)
+        if inspector.has_table("todo"):
+            columns = [column["name"] for column in inspector.get_columns("todo")]
+            if "priority" not in columns:
+                db.session.execute(
+                    text(
+                        "ALTER TABLE todo ADD COLUMN priority INTEGER NOT NULL DEFAULT 0",
+                    ),
+                )
+                db.session.commit()
 
     # Register the JSON API blueprint (URL prefix lives on the blueprint).
     from .api.todos import bp as todos_bp

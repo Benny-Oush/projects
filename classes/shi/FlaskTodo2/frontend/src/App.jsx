@@ -67,6 +67,20 @@ export default function App() {
     }
   }
 
+  async function handlePriorityChange(id, priority) {
+    setError(null)
+    const previous = todos
+    setTodos((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, priority } : t)),
+    )
+    try {
+      await todosApi.setPriority(id, priority)
+    } catch (err) {
+      setTodos(previous)
+      setError(err.message)
+    }
+  }
+
   return (
     <main className="app">
       <h1>Todos</h1>
@@ -82,7 +96,12 @@ export default function App() {
       {loading ? (
         <p className="muted">Loading…</p>
       ) : (
-        <TodoList todos={todos} onToggle={handleToggle} onDelete={handleDelete} />
+        <TodoList
+          todos={todos}
+          onToggle={handleToggle}
+          onPriorityChange={handlePriorityChange}
+          onDelete={handleDelete}
+        />
       )}
     </main>
   )

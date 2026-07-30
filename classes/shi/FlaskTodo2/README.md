@@ -189,14 +189,13 @@ backend alongside it. To point the SPA at a different API base, set
 Base path: `/api/todos`. All requests/responses are JSON. A todo looks like:
 
 ```json
-{ "id": 1, "title": "Buy groceries", "complete": false }
+{ "id": 1, "title": "Buy groceries", "complete": false, "priority": 0 }
 ```
-
 | Method & path                | Body                                   | Success           | Errors |
 |------------------------------|----------------------------------------|-------------------|--------|
 | `GET /api/todos`             | —                                      | `200` array of todos (ordered by id) | — |
-| `POST /api/todos`            | `{ "title": "…" }`                     | `201` created todo | `400` empty/missing title |
-| `PATCH /api/todos/<id>`      | `{ "title"?: "…", "complete"?: bool }` | `200` updated todo | `400` empty title · `404` unknown id |
+| `POST /api/todos`            | `{ "title": "…", "priority"?: number }` | `201` created todo | `400` empty/missing title |
+| `PATCH /api/todos/<id>`      | `{ "title"?: "…", "complete"?: bool, "priority"?: number }` | `200` updated todo | `400` invalid value · `404` unknown id |
 | `DELETE /api/todos/<id>`     | —                                      | `204` no content   | `404` unknown id |
 | `GET /health`                | —                                      | `200 {"status":"ok"}` | — |
 
