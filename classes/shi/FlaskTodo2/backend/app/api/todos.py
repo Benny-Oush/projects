@@ -8,6 +8,7 @@ from flask import Blueprint, jsonify, request, abort
 
 from ..extensions import db
 from ..models import Todo
+from sqlalchemy import desc
 
 # The url_prefix lives on the blueprint, so routes below are relative to it.
 bp = Blueprint("todos", __name__, url_prefix="/api/todos")
@@ -17,7 +18,7 @@ bp = Blueprint("todos", __name__, url_prefix="/api/todos")
 def list_todos():
     """GET /api/todos -> 200, all todos ordered by id."""
     # SQLAlchemy 2.x style: select() + session.scalars() rather than Query.all().
-    todos = db.session.scalars(db.select(Todo).order_by(Todo.id)).all()
+    todos = db.session.scalars(db.select(Todo).order_by(desc(Todo.priority), Todo.id)).all()
     return jsonify([t.to_dict() for t in todos]), 200
 
 
@@ -29,7 +30,7 @@ def create_todo():
     if not title:
         abort(400, description="title is required and must be non-empty")
 
-    todo = Todo(title=title, complete=bool(data.get("complete", False)))
+    todo = Todo(title=title, complete=bool(data.get("complete", False)), priority=int(data.get("priority", 1)))
     db.session.add(todo)
     db.session.commit()
     return jsonify(todo.to_dict()), 201
@@ -55,6 +56,10 @@ def update_todo(todo_id):
     if "complete" in data:
         todo.complete = bool(data["complete"])
 
+    if "priority" in data:
+        if not 0 < data.get("priority") < 4:
+            abort(400, description="priority must be between 1-3")
+        todo.priority = int(data["priority"])
     db.session.commit()
     return jsonify(todo.to_dict()), 200
 

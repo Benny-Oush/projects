@@ -31,10 +31,16 @@ async function request(path, options = {}) {
 export const todosApi = {
   list: () => request('/todos'),
 
-  create: (title) =>
+  create: (title, priority = 1) =>
     request('/todos', {
       method: 'POST',
-      body: JSON.stringify({ title }),
+      body: JSON.stringify({ title, priority }),
+    }),
+  
+  update: (id, updates) => 
+    request(`/todos/${id}`, {
+      method: 'PATCH', 
+      body: JSON.stringify(updates),  
     }),
 
   toggle: (id, complete) =>

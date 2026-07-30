@@ -4,6 +4,7 @@ import { useState } from 'react'
 // after onAdd resolves successfully (App re-throws on failure).
 export default function AddTodo({ onAdd }) {
   const [title, setTitle] = useState('')
+  const [priority, setPriority] = useState(1)
   const [submitting, setSubmitting] = useState(false)
 
   async function handleSubmit(e) {
@@ -13,8 +14,9 @@ export default function AddTodo({ onAdd }) {
 
     setSubmitting(true)
     try {
-      await onAdd(trimmed)
+      await onAdd(trimmed, priority)
       setTitle('') // clear only on success
+      setPriority(1)
     } catch {
       // App already surfaced the error; keep the text so the user can retry.
     } finally {
@@ -31,6 +33,17 @@ export default function AddTodo({ onAdd }) {
         onChange={(e) => setTitle(e.target.value)}
         aria-label="New todo title"
       />
+      {/* תפריט בחירת עדיפות */}
+      <select
+        value={priority}
+        onChange={(e) => setPriority(Number(e.target.value))}
+        className='priority-select'
+        aria-label='Priority'
+      >
+        <option value={1}>Low</option>
+        <option value={2}>Medium</option>
+        <option value={3}>High</option>
+      </select>
       <button type="submit" disabled={submitting || !title.trim()}>
         Add
       </button>

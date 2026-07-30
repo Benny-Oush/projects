@@ -1,11 +1,13 @@
-import TodoItem from './TodoItem.jsx'
+import TodoItem from "./TodoItem.jsx";
 
 // Presentational list. Renders an empty state when there are no todos.
-export default function TodoList({ todos, onToggle, onDelete }) {
+export default function TodoList({ todos, onUpdate, onDelete }) {
   if (todos.length === 0) {
     return (
-      <p className="muted empty">Nothing here yet. Add your first todo above.</p>
-    )
+      <p className="muted empty">
+        Nothing here yet. Add your first todo above.
+      </p>
+    );
   }
 
   return (
@@ -14,10 +16,10 @@ export default function TodoList({ todos, onToggle, onDelete }) {
         <TodoItem
           key={todo.id}
           todo={todo}
-          onToggle={onToggle}
+          onUpdate={onUpdate}
           onDelete={onDelete}
         />
       ))}
     </ul>
-  )
+  );
 }

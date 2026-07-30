@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { todosApi } from './api/client.js'
 import AddTodo from './components/AddTodo.jsx'
 import TodoList from './components/TodoList.jsx'
+import Background from './components/Background.jsx'
 
 // App owns the single source of truth — the `todos` array. Child components are
 // presentational and reach the API only through the callbacks passed down here.
@@ -30,10 +31,10 @@ export default function App() {
     }
   }, [])
 
-  async function handleAdd(title) {
+  async function handleAdd(title, priority) {
     setError(null)
     try {
-      const created = await todosApi.create(title)
+      const created = await todosApi.create(title, priority)
       setTodos((prev) => [...prev, created])
     } catch (err) {
       setError(err.message)
@@ -42,12 +43,17 @@ export default function App() {
   }
 
   // Optimistic toggle: flip the checkbox immediately, roll back if the API fails.
-  async function handleToggle(id, complete) {
+async function handleUpdate(id, updates) {
     setError(null)
     const previous = todos
-    setTodos((prev) => prev.map((t) => (t.id === id ? { ...t, complete } : t)))
+    setTodos((prev) =>
+      prev
+        .map((t) => (t.id === id ? { ...t, ...updates } : t))
+        .sort((a, b) => (b.priority || 1) - (a.priority || 1))
+    )
+    
     try {
-      await todosApi.toggle(id, complete)
+      await todosApi.update(id, updates)
     } catch (err) {
       setTodos(previous) // rollback
       setError(err.message)
@@ -68,6 +74,8 @@ export default function App() {
   }
 
   return (
+    <>
+    <Background />
     <main className="app">
       <h1>Todos</h1>
 
@@ -82,8 +90,9 @@ export default function App() {
       {loading ? (
         <p className="muted">Loading…</p>
       ) : (
-        <TodoList todos={todos} onToggle={handleToggle} onDelete={handleDelete} />
+        <TodoList todos={todos} onUpdate={handleUpdate} onDelete={handleDelete} />
       )}
     </main>
+    </>
   )
 }

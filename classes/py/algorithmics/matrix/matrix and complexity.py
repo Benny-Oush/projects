@@ -143,23 +143,67 @@ def largest_even_rectangle(mat):
 
 # 7. Write a function that accepts a square matrix of numbers and returns the column whose elements have the largest greatest common divisor. The function returns the column as a list.
 
-def greatest_column_common_divisor(mat):
-    for i in range(len(mat)):
-        smallest = mat[0][i]
-        for j in range(1, len(mat[0])):
-            if mat[j][i] < smallest:
-                smallest = mat[j][i]
+def my_gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
 
-# 8. Write a function that accepts a matrix of numbers and a number n. The function returns a new matrix, the same as the original with after filtering out every row and column which contains the number n.
+def find_lst_gcd(lst):
+    if not lst: return 0
+    gcd = lst[0]
+    for num in lst[1:]:
+        if gcd == 1: return 1
+        gcd = my_gcd(gcd, num)
+    return gcd
+
+def find_matrix_column_gcd(mat):
+    if not mat or not mat[0]: return []
+    greatest = -1
+    column = []
+    for i in range(len(mat)):
+        c = [mat[j][i] for j in range(len(mat))]
+        gcd = find_lst_gcd(c)
+        if gcd > greatest:
+            greatest = gcd
+            column = c
+    return column
+
+# ⬆️ O(n^2) 
+
+# 8. Write a function that accepts a matrix of numbers and a number n. The function returns a new matrix, same as the original - after filtering out every row and column which contains the number n.
+
+def clean_matrix(mat, n): 
+    rows_to_remove = []
+    columns_to_remove = []
+    clean_mat = []
+    for i in range(len(mat)):
+        for j in range(len(mat[0])):
+            if mat[i][j] == n:
+                rows_to_remove.append(i)
+                columns_to_remove.append(j)
+    for i in range(len(mat)):
+        if i in rows_to_remove:
+            continue
+        new_row = []
+        for j in range(len(mat[0])):
+            if j not in columns_to_remove:
+                new_row.append(mat[i][j])
+        clean_mat.append(new_row)
+    return clean_mat
+
+# ⬆️ O(n*m)
 
 # For example, if the function gets this matrix:
 
-# 1 7 6 4
-# 8 3 0 2
-# 5 9 1 3
-# 8 1 2 4
+mat = [
+    [1, 7, 6, 4],
+    [8, 3, 0, 2],
+    [5, 9, 1, 3],
+    [8, 1, 2, 4]
+ ]
 
 # And if the second parameter is the number 8, then the function should filter the first column, the second row and the last row. It will return:
 
 # 7 6 4
 # 9 1 3
+

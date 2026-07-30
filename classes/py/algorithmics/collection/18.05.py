@@ -14,7 +14,6 @@ def is_one_a_digit(txt):
     return False
         
 
-
 def count_spaces(txt):
     count = 0
     for char in txt:
@@ -159,7 +158,7 @@ def are_all_digits_in(txt):
             return False
     return True
 
-print(are_all_digits_in('a0 g123456789KH Loeipk ludoz'))
+# print(are_all_digits_in('a0 g123456789KH Loeipk ludoz'))
 # print(ord("A"), ord("Z"))
 
 
