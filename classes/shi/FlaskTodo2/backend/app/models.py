@@ -15,6 +15,7 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     complete = db.Column(db.Boolean, default=False, nullable=False)
+    priority = db.Column(db.Integer, default=0, nullable=False)
 
     def to_dict(self):
         """Serialize to the JSON shape the API and the frontend agree on."""
@@ -22,6 +23,7 @@ class Todo(db.Model):
             "id": self.id,
             "title": self.title,
             "complete": self.complete,
+            "priority": self.priority,
         }
 
     def __repr__(self):
