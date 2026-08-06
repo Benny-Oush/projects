@@ -17,28 +17,29 @@ over HTTP/JSON**:
 ## Architecture
 
 ```
-                    Browser (http://localhost:8080)
+                Browser (http://localhost:8080)
+                
                               │
                               ▼
-        ┌───────────────────────────────────────────┐
+        ┌────────────────────────────────────────────┐
         │  frontend  (nginx :80, published on 8080)  │
         │  • serves the built React SPA              │
         │  • proxies /api/* ──► backend:5000         │
-        └───────────────────────────────────────────┘
+        └────────────────────────────────────────────┘
                               │  HTTP/JSON
                               ▼
-        ┌───────────────────────────────────────────┐
+        ┌────────────────────────────────────────────┐
         │  backend  (gunicorn + Flask :5000)         │
         │  • JSON REST API under /api/todos          │
         │  • app factory + blueprint + extensions    │
         │  • schema via Flask-Migrate (no create_all)│
-        └───────────────────────────────────────────┘
+        └────────────────────────────────────────────┘
                               │  SQL (mysql+pymysql)
                               ▼
-        ┌───────────────────────────────────────────┐
+        ┌────────────────────────────────────────────┐
         │  mysql 8.0  (:3306, named volume)          │
         │  • database `flask`, table `todo`          │
-        └───────────────────────────────────────────┘
+        └────────────────────────────────────────────┘
 ```
 
 Both proxies (Vite in dev, nginx in prod) forward `/api` to the backend on the
@@ -97,7 +98,7 @@ Now open **http://localhost:8080** and create / toggle / delete todos.
 | frontend | http://localhost:8080            | the app you actually use       |
 | backend  | http://localhost:5000/api/todos  | raw JSON API                   |
 | backend  | http://localhost:5000/health     | `{"status": "ok"}`             |
-| mysql    | localhost:3306                    | database `flask`               |
+| mysql    | localhost:3306                   | database `flask`              |
 
 Tear down with `docker compose down` (add `-v` to also delete the data volume).
 
@@ -192,12 +193,12 @@ Base path: `/api/todos`. All requests/responses are JSON. A todo looks like:
 { "id": 1, "title": "Buy groceries", "complete": false }
 ```
 
-| Method & path                | Body                                   | Success           | Errors |
-|------------------------------|----------------------------------------|-------------------|--------|
+| Method & path                | Body                                   | Success               | Errors |
+|------------------------------|----------------------------------------|-----------------------|--------|
 | `GET /api/todos`             | —                                      | `200` array of todos (ordered by id) | — |
-| `POST /api/todos`            | `{ "title": "…" }`                     | `201` created todo | `400` empty/missing title |
-| `PATCH /api/todos/<id>`      | `{ "title"?: "…", "complete"?: bool }` | `200` updated todo | `400` empty title · `404` unknown id |
-| `DELETE /api/todos/<id>`     | —                                      | `204` no content   | `404` unknown id |
+| `POST /api/todos`            | `{ "title": "…" }`                     | `201` created todo    | `400` empty/missing title |
+| `PATCH /api/todos/<id>`      | `{ "title"?: "…", "complete"?: bool }` | `200` updated todo    | `400` empty title · `404` unknown id |
+| `DELETE /api/todos/<id>`     | —                                      | `204` no content      | `404` unknown id |
 | `GET /health`                | —                                      | `200 {"status":"ok"}` | — |
 
 `PATCH` is a **partial** update: send only the fields you want to change.

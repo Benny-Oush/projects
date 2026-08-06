@@ -46,9 +46,8 @@ arr3 = [
     [56, 65]               
 ]
 
-# print(is_super_perm(arr1))
-# print(is_super_perm(arr2))
-# print(is_super_perm(arr3))
+
+
 
 
 

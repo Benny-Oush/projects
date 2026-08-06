@@ -1,20 +1,19 @@
 import time
 import pyautogui
 
-wait_time = 300
+wait_time = 300  # 5 minutes
 press_time = 2    
+ 
+print("Scrolling script is running!\n")
 
-text = "הסקריפט הכללי פעיל!"
-print(text[::-1])
-
-count = 1
+count = 0
 
 while True:
     
     try:
         time.sleep(wait_time)
         
-        print(f"Starts pressing sequence number {count}")
+        print(f"Starting a new pressing sequence...")
 
         count += 1
         
@@ -24,8 +23,9 @@ while True:
             pyautogui.press('pagedown')
             time.sleep(0.01)
       
-        print("the pressing round has ended successfully. Returning to standby mode.")
+        print("The pressing round has ended successfully. Returning to standby mode.")
+        print(f'-- {count} -- sequences by now\n')
         
 
     except Exception as e:
-        print(f"שגיאה: {e}")
+        print(f"Error: {e}")

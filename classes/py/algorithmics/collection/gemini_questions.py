@@ -238,3 +238,82 @@ def analyes_log(log_file):
     most_noisy_service = max(stats['services'], key=stats['services'].get)
     
     return most_noisy_service, stats['levels'], stats['high_level_messages']
+
+
+
+class Book:
+    def __init__(self, title, author, price):
+        self.title = title
+        self.author = author
+        self.price = price
+    def apply_discount(self, percentage):
+        discount = 1.0 - percentage/100
+        self.price *= discount
+        print(f'Discount applied! The price of {self.title} is now {self.price:.2f}')
+
+
+class EBook(Book):
+    def __init__(self, title, author, price, file_size):
+        super().__init__(title, author, price)
+        self.file_size = file_size
+    def download(self):
+        print(f'Downloading {self.title}\nFile size: {self.file_size}MB')
+
+
+
+
+
+class SmartDevice:
+    def __init__(self, name, is_on=False):
+        self.name = name
+        self.is_on = is_on
+
+    def status_report(self):
+        print(f'The {self.name} is {"on" if self.is_on else "off"}')
+    def turn_on(self):
+        self.is_on = True
+        print(f'The {self.name} is on now')
+    def turn_off(self):
+        self.is_on = False
+        print(f'The {self.name} is off now')
+
+
+class SmartLight(SmartDevice):
+    def __init__(self, name, brightness, is_on=False):
+        super().__init__(name, is_on)
+        self.brightness = brightness
+
+    def status_report(self):
+        super().status_report()
+        print(f'Brightness: {self.brightness}')
+    
+class SmartThermostat(SmartDevice):
+    def __init__(self, name, temperature, is_on=False):
+        super().__init__(name, is_on)
+        self.temperature = temperature
+    def status_report(self):
+        super().status_report()
+        print(f'Temperature: {self.temperature}')
+
+class SmartHome:
+    def __init__(self, devices):
+        self.devices = devices
+    def show_all_statuses(self):
+        for device in self.devices:
+            device.status_report()
+    def active_movie_mode(self):
+        for device in self.devices:
+            if isinstance(device, SmartThermostat):
+                device.turn_on()
+                device.temperature = 22
+            elif isinstance(device, SmartLight):
+                device.turn_on()
+                device.brightness = 20
+
+
+# kitchen_light = SmartLight('kitchen light', 89, True)
+# washing_machine = SmartDevice('Washing machine')
+# smart_shower = SmartThermostat('Shower', 0)
+# home = SmartHome([kitchen_light, washing_machine, smart_shower])
+
+

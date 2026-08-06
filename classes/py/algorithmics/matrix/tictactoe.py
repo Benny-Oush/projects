@@ -100,8 +100,7 @@ while True:
     winner = check_win(board)
 
     if winner:
-        print('\nWe have a winner! 🎉')
-        print(f'\n{winner} wins!\n')
+        print(f'\nWe have a winner! 🎉\n\n{winner} wins!\n')
         break
 
     active_player, waiting_player = waiting_player, active_player

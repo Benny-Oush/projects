@@ -4,7 +4,7 @@ def factorial(n):
     return n * factorial(n - 1)
 
 def fibonacci(n):
-    '''both 1st and 2nd numbers are 1'''
+    '''Both 1st and 2nd numbers are 1'''
     if n == 1:
         return 1
     if n == 0:
