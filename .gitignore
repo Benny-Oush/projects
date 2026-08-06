@@ -1,6 +1,7 @@
-
 .idea/
-
 target/
-
 .vscode/
+.env
+node_modules/
+__pycache__/
+dist/
