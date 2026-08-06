@@ -21,7 +21,7 @@ jobs:
 
       - name: Apply database migrations
         # Fresh CI database: create the schema via Flask-Migrate (no create_all).
-        run: docker compose exec -T backend flask db upgrade -d backend/migrations/versions
+        run: docker compose exec -T backend flask db upgrade -d migrations/versions
 
       - name: Show running containers
         run: docker ps
