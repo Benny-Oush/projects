@@ -21,7 +21,7 @@ jobs:
 
       - name: Apply database migrations
         # Fresh CI database: create the schema via Flask-Migrate (no create_all).
-        run: docker compose exec -T backend flask db upgrade 
+        run: docker compose exec -T backend flask db upgrade
 
       - name: Show running containers
         run: docker ps
@@ -36,3 +36,33 @@ jobs:
       - name: Shut down containers
         if: always()
         run: docker compose down -v --remove-orphans
+  build-and-push:
+    needs: integration-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Backend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./classes/shi/FlaskTodo/backend
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/flask-todo-backend:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/flask-todo-backend:${{ github.sha }}
+
+      - name: Build and push Frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./classes/shi/FlaskTodo/frontend
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/flask-todo-frontend:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/flask-todo-frontend:${{ github.sha }}

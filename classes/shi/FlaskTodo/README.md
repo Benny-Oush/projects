@@ -1,3 +1,8 @@
+[![CI Pipeline](https://github.com/Benny-Oush/projects/actions/workflows/ci.yml/badge.svg)](https://github.com/Benny-Oush/projects/actions/workflows/ci.yml)
+
+
+
+
 We chose to use GitHub's Service Container for MySQL. It is fully integrated with GitHub operations. It eliminates the need for a separate docker-compose.yml file just for tests, automatically manages network health (health checks) before starting the tests, and allows for clean injection of environment variables (environment variables) automatically into the Runner.
 
 
