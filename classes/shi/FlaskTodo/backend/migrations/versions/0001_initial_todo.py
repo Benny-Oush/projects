@@ -29,6 +29,7 @@ def upgrade():
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("title", sa.String(length=100), nullable=False),
         sa.Column("complete", sa.Boolean(), nullable=False),
+        sa.Column('priority', sa.Integer(), nullable=True),
         sa.PrimaryKeyConstraint("id"),
     )
 
