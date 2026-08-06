@@ -1,7 +1,13 @@
 .idea/
 target/
 .vscode/
-.env
-node_modules/
-__pycache__/
-dist/
+
+
+# Secrets
+**/.env
+
+# Python
+**/__pycache__/
+**/*.pyc
+**/venv/
+**/env/
