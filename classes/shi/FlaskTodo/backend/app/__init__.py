@@ -33,11 +33,11 @@ def create_app(config_name=None):
 
 
     # -----
-    # from . import models  # noqa: F401
+    from . import models  # noqa: F401
 
-    # # Create tables that don't exist yet (idempotent — safe on every restart).
-    # with app.app_context():
-    #     db.create_all()
+    # Create tables that don't exist yet (idempotent — safe on every restart).
+    with app.app_context():
+        db.create_all()
     # -----
 
 
