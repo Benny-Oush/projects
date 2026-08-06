@@ -31,16 +31,6 @@ def create_app(config_name=None):
     # Import models after db.init_app so Flask-Migrate's autogenerate can see
     # them — done here rather than at top level to avoid an import cycle.
 
-
-    # -----
-    from . import models  # noqa: F401
-
-    # Create tables that don't exist yet (idempotent — safe on every restart).
-    with app.app_context():
-        db.create_all()
-    # -----
-
-
     # Register the JSON API blueprint (URL prefix lives on the blueprint).
     from .api.todos import bp as todos_bp
     app.register_blueprint(todos_bp)
