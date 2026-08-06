@@ -1,3 +1,6 @@
+We chose to use GitHub's Service Container for MySQL. It is fully integrated with GitHub operations. It eliminates the need for a separate docker-compose.yml file just for tests, automatically manages network health (health checks) before starting the tests, and allows for clean injection of environment variables (environment variables) automatically into the Runner.
+
+
 # Todo App — Flask API + React Client + Docker
 
 A small but production-shaped todo application, built as a teaching artifact for
