@@ -17,7 +17,7 @@ def _mysql_uri():
     ``root`` / ``12345`` / ``mysql`` / ``flask``.
     """
     user = os.getenv("DB_USER", "root")
-    password = os.getenv("DB_PASSWORD", "")
+    password = os.getenv("DB_PASSWORD", "12345")
     host = os.getenv("DB_HOST", "mysql")
     name = os.getenv("DB_NAME", "flask")
     return f"mysql+pymysql://{user}:{password}@{host}/{name}"

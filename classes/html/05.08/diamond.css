@@ -1,0 +1,25 @@
+.big {
+  justify-self: center;
+  display: flex;
+  gap: 10px;
+}
+
+.small {
+  height: 90px;
+  width: 90px;
+  margin: 10px;
+  border-radius: 50% 50% 0 0;
+  transition-duration: 0.9s;
+}
+
+.small:hover {
+    rotate: 540deg;
+    background-color: rgb(255, 77, 95);
+    transition: transform 0.5s cubic-bezier(0.9, 0.4, 1);
+}
+
+.one div {background-color: rgb(250, 164, 237) }
+
+.two div { background-color: rgb(145, 167, 255) }
+
+.three div { background-color: rgb(74, 74, 210) }

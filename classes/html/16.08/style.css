@@ -1,0 +1,17 @@
+.myDivs {
+    margin: 30px 0 0 0;
+    height: 100px;
+    width: 100px;
+    background-color: blueviolet;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    border-radius: 10px;
+}
+.myDivs:hover {
+    background-color: rgb(81, 223, 211) !important;
+    transform: scale(1.1) !important;
+    font-size: 60px;
+    transition: 0.4s;
+}

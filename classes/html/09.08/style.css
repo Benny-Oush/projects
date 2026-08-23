@@ -1,0 +1,82 @@
+body {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    align-items: center;
+    justify-items: center;
+
+}
+
+span {
+    color: red;
+}
+
+#main {
+    display: flex;
+    gap: 20px;
+    height: 400px
+}
+
+#small {
+    width: 50%;
+    /* position: absolute; */
+    bottom: 0;
+}
+
+#list {
+    padding-top: 60px;
+}
+
+h1 {
+    color: rgb(0, 0, 209);
+}
+img {
+    height: 110%;
+    align-self: center;
+    display: grid;
+    object-fit: cover;
+}
+p {
+    background-color: #ffebdd;
+    padding: 2%;
+    border-radius: 12px;
+}
+
+#one {
+    width: 80%;
+}
+
+ul {
+    list-style-type:circle;
+}
+
+
+button {
+    display: flex;
+    justify-self: center;
+    background-color: rgb(255, 106, 106);
+    color: rgb(142, 5, 5);
+    border-radius: 15px;
+    border: none;
+    padding: 7px 12px; 
+    transition-duration: 0.2s;
+    font-size: 15px;
+}
+
+button:hover {
+    transform: scale(1.1);
+    transition: 0.3s;
+    background-color: rgb(254, 82, 82);
+    color: rgb(158, 2, 2);
+}
+
+input {
+    display: flex;
+    width: 100%;
+    padding: 2%;
+    background-color: rgb(205, 205, 255);
+    border-radius: 20px;
+    border: 2px solid #7070d3;
+}
+
+input:hover {
+    border: 2px solid rgb(0, 0, 164);
+}

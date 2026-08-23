@@ -377,3 +377,109 @@ def get_peak(arr):
     return peak
 
 # print(get_peak([3, 2, 1]))
+
+
+def is_valid(string):
+    upper_count = 0
+    lower_count = 0
+    for char in string:
+        if ord('a') <= ord(char) <= ord('z'):
+            lower_count += 1
+        elif ord('A') <= ord(char) <= ord('Z'):
+            upper_count += 1
+        else:
+            return False
+    return upper_count > lower_count
+
+# has_an_A_edge = 0
+# string = input('Enter a string: ')
+# while not is_valid(string):
+#     if string[0] == 'A' or string[-1] == 'A':
+#         has_an_A_edge += 1
+#     string = input('Enter another string: ')
+
+# print(has_an_A_edge)
+
+class Truck:
+    def __init__(self, truck_id: str, driver_name: str, max_weight=4000, is_refrigeration=False, is_free=True):
+        self.truck_id = truck_id
+        self.driver_name = driver_name
+        self.max_weight = max_weight
+        self.is_refrigeration = is_refrigeration
+        self.is_free = is_free
+    def get_truck_id(self):
+        return self.truck_id
+    def get_driver_name(self):
+        return self.driver_name
+    def get_max_weight(self):
+        return self.max_weight
+    def get_is_refrigeration(self):
+        return self.is_refrigeration
+    def get_is_free(self):
+        return self.is_free
+
+
+def print_refrigeration_heavy_trucks(trucks_arr: list[Truck]):
+    for truck in trucks_arr:
+        if truck.get_is_refrigeration() and truck.get_max_weight() >= 10000:
+            print(truck.get_truck_id())
+def find_free_heavy_refrigeration_truck(trucks_arr: list[Truck]):
+    heaviest = trucks_arr[0]
+    for truck in trucks_arr:
+        if truck.get_is_free() and truck.get_is_refrigeration():
+            if truck.get_max_weight() > heaviest.get_max_weight():
+                heaviest = truck
+    return heaviest.get_driver_name() if heaviest.is_refrigeration and heaviest.get_is_free() else 'No name'
+
+# trucks = [
+#     Truck('1', 'Dudi', is_refrigeration=True),
+#     Truck('2', 'Benny', 10000, is_refrigeration=True),
+#     Truck('3', 'Mendi'),
+#     Truck('4', 'Moshe', 7000),
+#     Truck('5', 'Bunam', 12000, is_refrigeration=True),
+#     Truck('6', 'Dor'),
+#     Truck('7', 'yossi', 11000, is_refrigeration=True)
+# ]
+
+# print_refrigeration_heavy_trucks(trucks)
+# print(find_free_heavy_refrigeration_truck(trucks))
+
+def sum_of_divisors(num):
+    total = 0
+    for i in range(1, num):
+        if num % i == 0:
+            total += i
+    return total
+
+def check_number_type(num):
+    total = sum_of_divisors(num)
+    if total == num:
+        return 'P'
+    if total < num:
+        return 'D'
+    if total > num:
+        return 'A'
+
+def all_numbers_by_type(limit: int, num_type: str):
+    found = []
+    for i in range(2, limit):
+        found_type = check_number_type(i)
+        if found_type == num_type:
+            found.append(i)
+    return found
+
+def is_k_rolling(str1: str, str2: str, k: int) -> bool:
+    return str1[k:] + str1[:k] == str2
+
+def find_rolling_k(str1: str, str2: str) -> int:
+    if len(str1) != len(str2):
+        return -1
+    for i in range(len(str1)):
+        if is_k_rolling(str1, str2, i): return i
+    return -1
+
+def are_all_rotating(arr: list[str], s: str) -> bool:
+    for string in arr:
+        if find_rolling_k(string, s) == -1:
+            return False
+    return True

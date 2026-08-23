@@ -77,5 +77,4 @@ def sum_exists(lst, n):
             return True
     return False
 
-print(sum_exists([9, 1, 3, 5, 4], 11))
-
+# print(sum_exists([9, 1, 3, 5, 4], 11))
