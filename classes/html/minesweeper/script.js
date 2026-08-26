@@ -1,228 +1,92 @@
-let GRID = [];
-let VISIBILITY = [];
-let NUMBER_OF_MINES = [];
-let FLAGS = [];
+const difficultySettings = {
+  easy: { rows: 10, cols: 10, mines: 12 },
+  medium: { rows: 12, cols: 12, mines: 25 },
+  hard: { rows: 15, cols: 15, mines: 40 },
+};
 
-let GAME_ON = false;
-let HAS_LOST = false;
+const boardUI = document.getElementById("board");
+const difficultySelect = document.getElementById("difficulty");
+const resetButton = document.getElementById("reset");
+const statusUI = document.getElementById("status");
 
-let IS_FIRST_CLICK = true;
-let CURRENT_SIZE = 0;
-let CURRENT_MINES = 0;
+function setupBoardUI(config) {
+  boardUI.innerHTML = "";
+  boardUI.style.display = "grid";
+  boardUI.style.gridTemplateColumns = `repeat(${config.cols}, 1fr)`;
+  boardUI.style.gridTemplateRows = `repeat(${config.rows}, 1fr)`;
 
-document.getElementById("low-button").addEventListener("click", () => {
-  create_grid(10, 10);
-  write_numbers(GRID);
-});
+  for (let r = 0; r < config.rows; r++) {
+    for (let c = 0; c < config.cols; c++) {
+      const cellDiv = document.createElement("div");
+      cellDiv.className = "cell";
 
-document.getElementById("mid-button").addEventListener("click", () => {
-  create_grid(12, 20);
-  write_numbers(GRID);
-});
-document.getElementById("high-button").addEventListener("click", () => {
-  create_grid(15, 25);
-  write_numbers(GRID);
-});
+      cellDiv.dataset.index = r * config.cols + c;
 
-function handleCellClick(r, c) {
-  if (!GAME_ON || HAS_LOST || VISIBILITY[r][c] === 1) {
-    return;
-  }
+      cellDiv.addEventListener("click", () => {
+        handleCellClick(r, c);
+      });
 
-  if (FLAGS[r][c] === 1) {
-    return;
-  }
+      cellDiv.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        toggleFlag(r, c);
+      });
 
-  if (IS_FIRST_CLICK) {
-    placeMinesAndNumbers(r, c);
-    IS_FIRST_CLICK = false;
-  }
-
-  if (GRID[r][c] === 1) {
-    HAS_LOST = true;
-    GAME_ON = false;
-    VISIBILITY[r][c] = 1;
-    revealAllMines();
-    console.log("Game Over!");
-    return;
-  }
-
-  const idx = r * CURRENT_SIZE + c;
-  checkSurroundings(idx);
-
-  if (checkForWin(GRID, VISIBILITY)) {
-    GAME_ON = false;
-    console.log("You Win!");
-  }
-}
-
-function toggleFlag(r, c) {
-  if (!GAME_ON || HAS_LOST) {
-    return;
-  }
-
-  if (VISIBILITY[r][c] === 0) {
-    FLAGS[r][c] = FLAGS[r][c] === 0 ? 1 : 0;
-  }
-}
-
-function revealMines() {
-  for (let i = 0; i < GRID.length; i++) {
-    for (let j = 0; j < GRID.length; j++) {
-      if (GRID[i][j] === 1 && FLAGS[i][j] === 0) {
-        VISIBILITY[i][j] = 1;
-      } else if (GRID[i][j] === 0 && FLAGS[i][j] === 1) {
-        VISIBILITY[i][j] = 1;
-      }
+      boardUI.appendChild(cellDiv);
     }
   }
 }
 
-function create_grid(size, numOfMines) {
-  GRID = [];
-  FLAGS = [];
-  VISIBILITY = [];
-  NUMBER_OF_MINES = [];
-
-  GAME_ON = true;
-  HAS_LOST = false;
-  IS_FIRST_CLICK = true;
-
-  CURRENT_SIZE = size;
-  CURRENT_MINES = numOfMines;
-
-  for (let i = 0; i < size; i++) {
-    GRID.push([]);
-    VISIBILITY.push([]);
-    NUMBER_OF_MINES.push([]);
-    FLAGS.push([]);
-
-    for (let j = 0; j < size; j++) {
-      GRID[i].push(0);
-      VISIBILITY[i].push(0);
-      NUMBER_OF_MINES[i].push([0]);
-      FLAGS[i].push(0);
-    }
-  }
-}
-
-function placeMinesAndNumbers(firstR, firstC) {
-  let minesPlaced = 0;
-
-  while (minesPlaced < CURRENT_MINES) {
-    const r = Math.floor(Math.random() * CURRENT_SIZE);
-    const c = Math.floor(Math.random() * CURRENT_SIZE);
-
-    if (Math.abs(r - firstR) <= 1 && Math.abs(c - firstC) <= 1) {
-      continue;
-    }
-
-    if (GRID[r][c] === 1) {
-      continue;
-    }
-
-    GRID[r][c] = 1;
-    minesPlaced++;
-  }
-
+function render() {
+  const cells = boardUI.children;
   const len = CURRENT_SIZE;
-  for (let i = 0; i < len; i++) {
-    for (let j = 0; j < len; j++) {
-      let sum = 0;
-      for (let di = -1; di <= 1; di++) {
-        for (let dj = -1; dj <= 1; dj++) {
-          if (di === 0 && dj === 0) continue;
 
-          const newI = i + di;
-          const newJ = j + dj;
+  for (let r = 0; r < len; r++) {
+    for (let c = 0; c < len; c++) {
+      const index = r * len + c;
+      const cellDiv = cells[index];
 
-          if (newI >= 0 && newI < len && newJ >= 0 && newJ < len) {
-            if (GRID[newI][newJ] === 1) {
-              sum++;
-            }
-          }
+      cellDiv.className = "cell";
+      cellDiv.innerHTML = "";
+
+      const isRevealed = VISIBILITY[r][c] === 1;
+      const isMine = GRID[r][c] === 1;
+      const isFlagged = FLAGS[r][c] === 1;
+      const neighborMines = NUMBER_OF_MINES[r][c];
+
+      if (isRevealed) {
+        cellDiv.classList.add("revealed");
+
+        if (isMine) {
+          cellDiv.classList.add("mine");
+          cellDiv.innerHTML = "💣";
+        } else if (isFlagged) {
+          cellDiv.innerHTML = "❌";
+        } else if (neighborMines > 0) {
+          cellDiv.innerHTML = neighborMines;
+          cellDiv.dataset.num = neighborMines;
         }
-      }
-      NUMBER_OF_MINES[i][j] = sum;
-    }
-  }
-}
-
-function write_numbers() {
-  const len = GRID.length;
-  for (let i = 0; i < len; i++) {
-    NUMBER_OF_MINES.push([]);
-    for (let j = 0; j < len; j++) {
-      let sum = 0;
-      for (let di = -1; di <= 1; di++) {
-        for (let dj = -1; dj <= 1; dj++) {
-          if (di === 0 && dj === 0) {
-            continue;
-          }
-          const newI = i + di;
-          const newJ = j + dj;
-          if (newI < 0 || newI >= len || newJ < 0 || newJ >= len) {
-            continue;
-          }
-          if (GRID[newI][newJ] === 1) {
-            sum++;
-          }
-        }
-      }
-      NUMBER_OF_MINES[i].push(sum);
-    }
-  }
-}
-
-function checkSurroundings(idx) {
-  const len = GRID[0].length;
-  const startR = Math.floor(idx / len);
-  const startC = idx % len;
-
-  VISIBILITY[startR][startC] = 1;
-
-  if (GRID[startR][startC] === 1 || NUMBER_OF_MINES[startR][startC] > 0) {
-    return;
-  }
-  let empties = [idx];
-  let visited = [];
-  visited.push(idx);
-
-  while (empties.length > 0) {
-    const currentIdx = empties.pop();
-    const r = Math.floor(currentIdx / len);
-    const c = currentIdx % len;
-
-    for (let di = -1; di <= 1; di++) {
-      for (let dj = -1; dj <= 1; dj++) {
-        if (di === 0 && dj === 0) {
-          continue;
-        }
-        const newI = r + di;
-        const newJ = c + dj;
-        const newIdx = newI * len + newJ;
-        if (newI < 0 || newI >= len || newJ < 0 || newJ >= len) {
-          continue;
-        }
-        if (VISIBILITY[newI][newJ] == 0) {
-          visited.push(newIdx);
-          VISIBILITY[newI][newJ] = 1;
-          if (GRID[newI][newJ] === 0 && NUMBER_OF_MINES[newI][newJ] === 0) {
-            empties.push(newIdx);
-          }
-        }
+      } else if (isFlagged) {
+        cellDiv.innerHTML = "🚩";
       }
     }
   }
 }
 
-function checkForWin(GRID, VISIBILITY) {
-  for (let i = 0; i < GRID.length; i++) {
-    for (let j = 0; j < GRID.length; j++) {
-      if (GRID[i][j] === 0 && VISIBILITY[i][j] === 0) {
-        return false;
-      }
-    }
+function updateStatusMessage(message) {
+  if (statusUI) {
+    statusUI.innerText = message;
   }
-  return true;
 }
+
+difficultySelect.addEventListener("change", startNewGame);
+resetButton.addEventListener("click", startNewGame);
+
+function startNewGame() {
+  const config = difficultySettings[difficultySelect.value];
+  create_grid(config.rows, config.mines);
+  setupBoardUI(config);
+  updateStatusMessage("Good Luck!");
+  render();
+}
+
+startNewGame();

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Faster+One&family=Michroma&family=Nabla&family=Science+Gothic:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minesweeper</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <h1>Minesweeper</h1>
+      <div class="difficulty-select">
+        <label for="difficulty">Difficulty Level</label>
+        <select id="difficulty">
+          <option value="easy" class="easy">Easy</option>
+          <option value="medium" class="medium">Medium</option>
+          <option value="hard" class="hard">Hard</option>
+        </select>
+      </div>
+      <div id="status"></div>
+      <div id="board" class="board-grid"></div>
+      <button id="reset">Reset Game</button>
+    </div>
+    <script src="model.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
