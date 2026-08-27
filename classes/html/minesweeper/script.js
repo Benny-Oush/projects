@@ -1,3 +1,21 @@
+const themeToggleBtn = document.getElementById("theme-toggle");
+const themeStyle = document.getElementById("theme-style");
+
+let isOldSchool = false;
+
+themeToggleBtn.addEventListener("click", () => {
+  isOldSchool = !isOldSchool;
+  
+  if (isOldSchool) {
+    themeStyle.href = "old-school.css";
+    themeToggleBtn.innerText = "Switch to Modern";
+  } else {
+    themeStyle.href = "style.css";
+    themeToggleBtn.innerText = "Switch to Old-School";
+  }
+});
+
+
 const difficultySettings = {
   easy: { rows: 10, cols: 10, mines: 12 },
   medium: { rows: 12, cols: 12, mines: 25 },
