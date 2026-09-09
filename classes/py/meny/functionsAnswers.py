@@ -1,21 +1,23 @@
 # q1
 
 def digits_sum(num):
-    sum = 0
+    total = 0
     while num:
         digit = num % 10
         num //= 10
-        sum += digit
-    return sum
+        total += digit
+    return total
 
 def find_largest_digits_sum(left, right):
+    if left > right:
+        left, right = right, left
     largest = 0
     largest_sum = 0
     for num in range(left, right + 1):
-        sum = digits_sum(num)
-        if sum > largest_sum:
+        total = digits_sum(num)
+        if total > largest_sum:
             largest = num
-            largest_sum = sum
+            largest_sum = total
     print(largest)
 
 left = int(input('Enter starting number: '))
@@ -59,35 +61,40 @@ def reverse(x: int) -> int:
 
 # q4
 
+def count_digits(n):
+    count = 0
+    while n:
+        count += 1
+        n //= 10
+    return count if count else 1
+
 def merge(a: int, b: int) -> int:
     res = 0
+    a_len = count_digits(a)
+    b_len = count_digits(b)
     a = reverse(a)
     b = reverse(b)
-    while a or b:
-        if a:
+    while a_len > 0 or b_len > 0:
+        if a_len > 0:
             res *= 10
             res += a % 10
             a //= 10
-        if b:
+            a_len -= 1
+        if b_len > 0:
             res *= 10
             res += b % 10
             b //= 10
+            b_len -= 1
     return res
 
+print(merge(1000, 352))
 
 # q5
 
 found = []
 
 for i in range(1000, 9901):
-    num = i
-    total = 0
-    while num:
-        total += num % 10
-        num //= 10
-        total += (num % 10) * 10
-        num //= 10
-    if total**2 == i:
+    if ((i // 100) + (i % 100)) ** 2 == i:
         found.append(i)
 print(found)
 
@@ -158,9 +165,3 @@ for i in range(8):
 
 final = int(input('Enter the final digit: '))
 check = (total % 10) + final
-print(True if check % 10 == 0 else False)
-
-
-
-
-
