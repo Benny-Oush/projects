@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Michroma&display=swap');
+
+* {
+  overflow: hidden;
+}
+
+:root {
+    --bg-color: #0b0c10;
+    --card-bg: #1f2833;
+    --neon-cyan: #66fcf1;
+    --neon-cyan-dim: #45a29e;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Michroma", system-ui, sans-serif;
+    background-color: rgb(21, 37, 63);
+    background-image: 
+        radial-gradient(circle at 15% 20%, rgba(69, 162, 158, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(102, 252, 241, 0.1) 0%, transparent 40%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+h1 {
+    font-size: clamp(1.6rem, 4vw, 3rem);
+    text-align: center;
+    margin: 30px 10px 50px;
+    color: #e0fcff;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px #fff;
+    animation: pulse-glow 2s infinite alternate;
+}
+
+@keyframes pulse-glow {
+    0% { transform: scale(1); filter: brightness(1); }
+    100% { transform: scale(1.02); filter: brightness(1.2); }
+}
+
+#cont {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    max-width: 1000px;
+    padding: 20px;
+}
+
+.game-div {
+    position: relative;
+    height: 210px;
+    width: 200px;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    text-align: center;
+    line-height: 1.3;
+    color: #fff;
+    border: 2px solid rgba(102, 252, 241, 0.2);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    background-color: var(--card-bg);
+    z-index: 1;
+}
+
+/* שכבת מעבר צבע שחורה בתחתית כדי שהטקסט תמיד יהיה קריא */
+.game-div::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(11, 12, 16, 0.95) 0%, rgba(11, 12, 16, 0) 60%);
+    z-index: -1;
+}
+
+/* התמונות עצמן, כעת עם בהירות נמוכה במקום אפור מת */
+.game-div::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    z-index: -2;
+    filter: brightness(0.65) saturate(1.2);
+}
+
+.game-div:hover {
+    transform: translateY(-10px);
+    border-color: var(--neon-cyan);
+    box-shadow: 
+        0 15px 30px rgba(0, 0, 0, 0.6),
+        0 0 15px rgba(102, 252, 241, 0.4),
+        inset 0 0 10px rgba(102, 252, 241, 0.2);
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px var(--neon-cyan);
+}
+
+/* הבלטת התמונה והגדלה עדינה בריחופה */
+.game-div:hover::before {
+    transform: scale(1.08);
+    filter: brightness(0.9) saturate(1.3);
+    transition: 0.4s;
+}
+
+
+#minesweeper::before {
+  background-image: url(./assets/צילום\ מסך\ 2026-09-03\ 140527.png);
+}
+
+#missing-number::before {
+  background-image: url(./assets/צילום\ מסך\ 2026-09-03\ 142303.png);
+}
+
+#rps::before {
+  background-image: url(./assets/צילום\ מסך\ 2026-09-03\ 143339.png);
+}
+
+#snake::before {
+  background-image: url(./assets/צילום\ מסך\ 2026-09-03\ 144100.png);
+}
+
+#cards::before {
+  background-image: url(./assets/צילום\ מסך\ 2026-09-07\ 201858.png);
+}

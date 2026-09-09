@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: rgb(231, 255, 238);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav {
+    position: fixed;
+    display: flex;
+    gap: 20px;
+    background-color: rgba(83, 230, 230, 0.3);
+    padding: 20px ;
+    width: 100%;
+    justify-content: center;
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+
+}
+
+select, button {
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(146, 241, 134);
+    height: 30px;
+    width: 150px;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background-color: rgb(52, 222, 52);
+    transform: scale(1.1);
+}
+
+#cont {
+  margin-top: 90px;
+  gap: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#cont img {
+    border: 3px solid rgb(72, 100, 133);
+    border-radius: 15px;
+    width: 500px;
+    height: 350px;
+    object-fit: cover;
+}

@@ -1,0 +1,119 @@
+* {
+    color: rgb(2, 2, 192);
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(237, 218, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+.top-score-container {
+    margin: 10px 0 0 -460px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+#top-score {
+    color: rgb(100, 10, 184);
+    font-size: 25px;
+    margin: 0;
+}
+
+#reset-top-score-button {
+padding: 6px 14px;
+    font-size: clamp(14px, 2.5vw, 18px);
+    background-color: rgb(78, 105, 237);
+    border: none;
+    border-radius: 12px;
+    color: rgb(232, 242, 255);
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+#reset-top-score-button:hover {
+    background-color: rgb(65, 65, 194);
+    transform: scale(1.05);
+}
+
+h1 {
+    margin-top: 10px;
+    font-size: 50px;
+    text-align: center;
+}
+
+h2 {
+    margin-top: -20px;
+    font-size: 35px;
+    text-align: center;
+}
+
+
+
+#cont {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.row {
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+}
+
+.row div{
+    width: 28px;
+    height: 28px;
+    background-color: rgb(182, 182, 255);
+}
+
+.border { background-color: rgb(51, 69, 84) !important}
+.body { background-color: rgb(75, 199, 95) !important}
+.apple { background-color: rgb(255, 119, 0) !important}
+.head { background-color: rgb(20, 117, 53) !important}
+.hit { background-color: rgb(255, 0, 0) !important}
+
+
+
+
+
+
+
+/* Back to Portal Button Styles */
+.back-to-portal-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #2c3e50;
+    span {
+        color: #fee6f7;  
+    }
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 99999;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    direction: rtl;
+}
+
+.back-to-portal-btn:hover {
+    background-color: #34495e;
+    transform: translateY(-2px);
+    color: #fff;
+}
