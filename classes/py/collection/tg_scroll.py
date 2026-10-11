@@ -22,7 +22,7 @@ while True:
         while time.time() < end_time:
             pyautogui.press('pagedown')
             time.sleep(0.01)
-      
+        pyautogui.press("up", presses=17, interval=0.001)      
         print("The pressing round has ended successfully. Returning to standby mode.")
         print(f'-- {count} -- sequences by now\n')
         

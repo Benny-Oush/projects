@@ -1,0 +1,7 @@
+.env
+data/
+projects/
+*.state.json
+__pycache__/
+.book_ai/
+samples/
