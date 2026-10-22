@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="[http://www.idpf.org/2007/opf](http://www.idpf.org/2007/opf)" unique-identifier="BookId" version="3.0">
+  <metadata xmlns:dc="[http://purl.org/dc/elements/1.1/](http://purl.org/dc/elements/1.1/)">
+    <dc:title>Test Complex Book</dc:title>
+    <dc:creator>Test Author</dc:creator>
+    <dc:language>en</dc:language>
+    <dc:identifier id="BookId">urn:uuid:12345</dc:identifier>
+  </metadata>
+  <manifest>
+    <item id="css" href="style.css" media-type="text/css"/>
+    <item id="ch1" href="ch1.xhtml" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="ch1"/>
+  </spine>
+</package>

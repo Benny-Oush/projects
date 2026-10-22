@@ -1,0 +1,26 @@
+.light {
+    height: 90px;
+    width: 90px;
+    background-color: gray;
+    border-radius: 50%;
+}
+
+.cont {
+    width: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-self: center;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(183, 195, 237);
+    margin: 35px;
+}
+
+#root {
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}

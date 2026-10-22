@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book AI — סביבת עבודה לתרגום ועריכת ספרים דיגיטליים</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="theme-dark">
+    <header class="topbar" role="banner">
+        <div class="brand">
+            <span class="logo-badge">📚 Book AI</span>
+            <span class="subtitle">מערכת מקצועית לתרגום, עריכה ושימור מבנה EPUB/PDF/MOBI</span>
+        </div>
+        <div class="topbar-actions">
+            <button id="btn-back-home" class="btn secondary hidden" aria-label="חזרה למסך הפרויקטים">⬅ כל הפרויקטים</button>
+            <button id="btn-secrets-modal" class="btn secondary" aria-label="ניהול מפתחות API">🔑 מפתחות API</button>
+            <button id="btn-theme-toggle" class="btn secondary" aria-label="החלף ערכת נושא">🌓 ערכת נושא</button>
+        </div>
+    </header>
+
+    <main class="container" role="main">
+        <section id="screen-home">
+            <div class="section-header">
+                <h1>הפרויקטים שלי</h1>
+                <div class="header-buttons">
+                    <button id="btn-new-project-toggle" class="btn primary">+ פרויקט חדש</button>
+                </div>
+            </div>
+
+            <div id="panel-create-project" class="card hidden">
+                <h2>יצירת פרויקט ספר חדש</h2>
+                <form id="form-create-project">
+                    <div class="dropzone" id="file-dropzone" tabindex="0" role="button" aria-label="בחר או גרור קובץ ספר">
+                        <input type="file" id="input-book-file" accept=".epub,.pdf,.mobi" required>
+                        <p id="dropzone-label">גרור לכאן קובץ <strong>EPUB, PDF או MOBI</strong> או לחץ לבחירה</p>
+                    </div>
+                    <div class="form-grid">
+                        <label>שם הפרויקט (אופציונלי)
+                            <input type="text" id="new-proj-name" placeholder="יזוהה אוטומטית מהמטא-דאטה של הספר">
+                        </label>
+                        <label>שפת מקור
+                            <select id="new-src-lang"></select>
+                        </label>
+                        <label>שפת יעד
+                            <select id="new-tgt-lang"></select>
+                        </label>
+                        <label>מטרת העיבוד
+                            <select id="new-goal"></select>
+                        </label>
+                        <label>ספק AI
+                            <select id="new-provider"></select>
+                        </label>
+                        <label>מודל AI
+                            <input type="text" id="new-model" list="models-datalist" value="gemini-2.5-flash" required>
+                            <datalist id="models-datalist"></datalist>
+                        </label>
+                    </div>
+                    <label class="checkbox-row">
+                        <input type="checkbox" id="new-mock-mode">
+                        <span>מצב בדיקה דטרמיניסטי (Mock Provider ללא שליחה לספק חיצוני)</span>
+                    </label>
+                    <div class="form-actions">
+                        <button type="submit" class="btn primary" id="btn-submit-create">נתח מבנה ספר וצור פרויקט</button>
+                        <button type="button" class="btn secondary" id="btn-cancel-create">ביטול</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="data-table" aria-label="רשימת פרויקטים">
+                        <thead>
+                            <tr>
+                                <th>שם הספר</th>
+                                <th>קובץ ופורמט</th>
+                                <th>שפות</th>
+                                <th>מטרה</th>
+                                <th>ספק ומודל</th>
+                                <th>סטטוס</th>
+                                <th>יחידות (הושלמו/כשל/סה״כ)</th>
+                                <th>התקדמות</th>
+                                <th>עלות משוערת</th>
+                                <th>פעולות</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projects-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="screen-workspace" class="hidden">
+            <div class="workspace-header card">
+                <div>
+                    <h1 id="ws-title">שם הפרויקט</h1>
+                    <p id="ws-subtitle" class="muted"></p>
+                </div>
+                <div class="control-bar" role="toolbar" aria-label="בקרת תהליך עיבוד">
+                    <button class="btn primary" data-ctrl="start">▶ התחל / המשך</button>
+                    <button class="btn warning" data-ctrl="pause">⏸ השהה</button>
+                    <button class="btn danger" data-ctrl="stop">⏹ עצור</button>
+                    <button class="btn secondary" data-ctrl="retry_failed">🔄 נסה שוב נכשלות</button>
+                    <button class="btn secondary" data-ctrl="retry_flagged">🚩 נסה שוב מסומנות</button>
+                    <button class="btn success" id="btn-ws-build">📦 הפק ואמת EPUB</button>
+                    <a id="btn-ws-download" class="btn primary hidden" href="#" download>⬇ הורד EPUB</a>
+                </div>
+            </div>
+
+            <div class="card progress-panel">
+                <div class="progress-bar-outer" aria-label="מד התקדמות">
+                    <div id="ws-progress-fill" class="progress-bar-inner" style="width: 0%">0%</div>
+                </div>
+                <div class="metrics-grid">
+                    <div><strong>סטטוס:</strong> <span id="m-status">-</span></div>
+                    <div><strong>הושלמו:</strong> <span id="m-done">0/0</span></div>
+                    <div><strong>פעילות כעת:</strong> <span id="m-active">0</span></div>
+                    <div><strong>בהמתנה:</strong> <span id="m-pending">0</span></div>
+                    <div><strong>נכשלו / לבדיקה:</strong> <span id="m-issues">0 / 0</span></div>
+                    <div><strong>פרק נוכחי:</strong> <span id="m-chapter">-</span></div>
+                    <div><strong>זמן ריצה / משוער (ETA):</strong> <span id="m-eta">-</span></div>
+                    <div><strong>טוקנים (קלט/פלט):</strong> <span id="m-tokens">0 / 0</span></div>
+                    <div><strong>עלות מצטברת:</strong> <span id="m-cost">$0.0000</span></div>
+                </div>
+            </div>
+
+            <nav class="tabs-nav" role="tablist">
+                <button class="tab-btn active" data-tab="tab-units" role="tab">יחידות עיבוד ועריכה</button>
+                <button class="tab-btn" data-tab="tab-preview" role="tab">תצוגה מקדימה ופרקים</button>
+                <button class="tab-btn" data-tab="tab-settings" role="tab">הגדרות עיבוד ועיצוב</button>
+                <button class="tab-btn" data-tab="tab-glossary" role="tab">מילון מונחים ו-TM</button>
+                <button class="tab-btn" data-tab="tab-logs" role="tab">יומן ודוח בדיקת פלט</button>
+            </nav>
+
+            <div id="tab-units" class="tab-content card">
+                <div class="filter-bar">
+                    <select id="filter-status" aria-label="סינון לפי סטטוס">
+                        <option value="">כל הסטטוסים</option>
+                        <option value="pending">בהמתנה (pending)</option>
+                        <option value="done">הושלם (done)</option>
+                        <option value="manual">נערך ידנית (manual)</option>
+                        <option value="flagged">לבדיקה (flagged)</option>
+                        <option value="failed">נכשל (failed)</option>
+                    </select>
+                    <select id="filter-chapter" aria-label="סינון לפי פרק">
+                        <option value="">כל הפרקים</option>
+                    </select>
+                    <input type="search" id="filter-search" placeholder="חיפוש בטקסט מקור, תוצאה או מזהה...">
+                    <button id="btn-filter-apply" class="btn secondary">סנן</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>מזהה</th>
+                                <th>רכיב</th>
+                                <th>סטטוס</th>
+                                <th>טקסט מקור (מוגן תגיות)</th>
+                                <th>טקסט מעובד</th>
+                                <th>ניסיונות</th>
+                                <th>פעולות</th>
+                            </tr>
+                        </thead>
+                        <tbody id="units-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="tab-preview" class="tab-content card hidden">
+                <div class="filter-bar">
+                    <label>בחר פרק לתצוגה מקדימה:
+                        <select id="preview-chapter-select"></select>
+                    </label>
+                </div>
+                <div id="preview-container" class="preview-box"></div>
+            </div>
+
+            <div id="tab-settings" class="tab-content card hidden">
+                <form id="form-ws-settings">
+                    <h3>הגדרות AI, מקטעים ומקביליות</h3>
+                    <div class="form-grid">
+                        <label>מטרת עיבוד <select id="set-goal"></select></label>
+                        <label>שפת מקור <select id="set-src-lang"></select></label>
+                        <label>שפת יעד <select id="set-tgt-lang"></select></label>
+                        <label>ספק <select id="set-provider"></select></label>
+                        <label>מודל <input type="text" id="set-model"></label>
+                        <label>כתובת API מותאמת (Base URL) <input type="text" id="set-base-url"></label>
+                        <label>Temperature <input type="number" step="0.1" id="set-temp" value="0.3"></label>
+                        <label>גודל מקטע בתווים <input type="number" id="set-chunk-chars" value="6000"></label>
+                        <label>חפיפה ביחידות סמוכות <input type="number" id="set-overlap" value="2"></label>
+                        <label>מקביליות (Concurrency) <input type="number" id="set-concurrency" value="2"></label>
+                        <label>בקשות לדקה (RPM) <input type="number" id="set-rpm" value="30"></label>
+                        <label>ניסיונות עיבוד תוכן <input type="number" id="set-attempts" value="3"></label>
+                        <label>ניסיונות API (HTTP) <input type="number" id="set-api-retries" value="5"></label>
+                        <label>Timeout (שניות) <input type="number" id="set-timeout" value="120"></label>
+                        <label>מחיר למיליון טוקני קלט ($) <input type="number" step="0.01" id="set-price-in" value="0.15"></label>
+                        <label>מחיר למיליון טוקני פלט ($) <input type="number" step="0.01" id="set-price-out" value="0.60"></label>
+                        <label>מדיניות כשל פורמט
+                            <select id="set-format-failure">
+                                <option value="flag">ניסיון תיקון וסימון לבדיקה</option>
+                                <option value="retry">ניסיון חוזר מול המודל</option>
+                                <option value="fail">כישלון סופי</option>
+                            </select>
+                        </label>
+                    </div>
+                    <label>הוראות סגנון מותאמות אישית (יתווספו לפרומפט המערכת)
+                        <textarea id="set-extra" rows="3"></textarea>
+                    </label>
+                    <hr>
+                    <h3>הגדרות עיצוב ופריסת EPUB</h3>
+                    <label class="checkbox-row">
+                        <input type="checkbox" id="set-preserve-layout" checked>
+                        <span>שמור על ה-CSS והעיצוב המקוריים של הספר (מומלץ)</span>
+                    </label>
+                    <div class="form-grid">
+                        <label>משפחת גופנים <input type="text" id="set-font-family" placeholder="למשל: David, Heebo, serif"></label>
+                        <label>גודל גופן <input type="text" id="set-font-size" placeholder="למשל: 1.1rem"></label>
+                        <label>גובה שורה <input type="text" id="set-line-height" placeholder="למשל: 1.6"></label>
+                        <label>כיווניות מסמך
+                            <select id="set-force-dir">
+                                <option value="auto">אוטומטי לפי שפת היעד</option>
+                                <option value="rtl">כפה ימין-לשמאל (RTL)</option>
+                                <option value="ltr">כפה שמאל-לימין (LTR)</option>
+                            </select>
+                        </label>
+                    </div>
+                    <label class="checkbox-row">
+                        <input type="checkbox" id="set-rtl-isolate" checked>
+                        <span>הפעל בידוד כיווניות (&lt;bdi&gt;) למקטעים באנגלית/מספרים בתוך טקסט RTL</span>
+                    </label>
+                    <label class="checkbox-row">
+                        <input type="checkbox" id="set-mock">
+                        <span>הפעל Mock Provider (לצורכי בדיקה בלבד)</span>
+                    </label>
+                    <button type="submit" class="btn primary">שמור הגדרות פרויקט</button>
+                </form>
+            </div>
+
+            <div id="tab-glossary" class="tab-content card hidden">
+                <h3>מילון מונחים לפרויקט</h3>
+                <form id="form-glossary" class="filter-bar">
+                    <input type="text" id="gl-src" placeholder="מונח מקור" required>
+                    <input type="text" id="gl-tgt" placeholder="מונח יעד מחייב" required>
+                    <select id="gl-type">
+                        <option value="person">שם דמות/אדם</option>
+                        <option value="location">מקום</option>
+                        <option value="technical">מונח מקצועי</option>
+                        <option value="general">כללי</option>
+                    </select>
+                    <button type="submit" class="btn primary">+ הוסף מונח</button>
+                </form>
+                <table class="data-table">
+                    <thead><tr><th>מונח מקור</th><th>מונח יעד</th><th>סוג</th><th>פעולות</th></tr></thead>
+                    <tbody id="glossary-tbody"></tbody>
+                </table>
+                <hr>
+                <h3>זיכרון תרגום מאושר (Translation Memory)</h3>
+                <table class="data-table">
+                    <thead><tr><th>טקסט מקור</th><th>תרגום מאושר</th><th>הקשר</th></tr></thead>
+                    <tbody id="tm-tbody"></tbody>
+                </table>
+            </div>
+
+            <div id="tab-logs" class="tab-content card hidden">
+                <div id="build-report-box" class="alert hidden"></div>
+                <div class="section-header">
+                    <h3>יומן אירועים ושגיאות פרויקט</h3>
+                    <button id="btn-clear-logs" class="btn secondary">נקה יומן</button>
+                </div>
+                <table class="data-table">
+                    <thead><tr><th>זמן</th><th>חומרה</th><th>שלב</th><th>יחידה</th><th>הודעה</th></tr></thead>
+                    <tbody id="logs-tbody"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <div id="modal-edit" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-box">
+            <h3>עריכה ידנית של יחידה <span id="edit-unit-id"></span></h3>
+            <p class="muted">הקפד לשמור על תגיות העיצוב המוגנות כגון <code>⟪T1⟫...⟪/T1⟫</code>.</p>
+            <label>טקסט מקור:
+                <textarea id="edit-src-text" rows="4" readonly></textarea>
+            </label>
+            <label>טקסט יעד לעריכה:
+                <textarea id="edit-tgt-text" rows="5"></textarea>
+            </label>
+            <div class="form-actions">
+                <button id="btn-save-edit" class="btn primary">💾 שמור עריכה ידנית</button>
+                <button id="btn-revert-edit" class="btn warning">↩ שחזר לגרסה קודמת</button>
+                <button id="btn-close-edit" class="btn secondary">סגור</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-secrets" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-box">
+            <h3>ניהול מוצפן של מפתחות API ובדיקת חיבור</h3>
+            <p class="muted">המפתחות מוצפנים מקומית באמצעות Fernet ולעולם אינם נכתבים ליומנים או לדוחות.</p>
+            <form id="form-secret">
+                <div class="form-grid">
+                    <label>ספק AI
+                        <select id="sec-provider">
+                            <option value="gemini">Google Gemini</option>
+                            <option value="openai">OpenAI</option>
+                            <option value="anthropic">Anthropic Claude</option>
+                            <option value="openrouter">OpenRouter</option>
+                            <option value="custom">Custom Provider</option>
+                        </select>
+                    </label>
+                    <label>מפתח API
+                        <input type="password" id="sec-key" placeholder="הזן מפתח לשמירה מוצפנת" required>
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn primary">שמור מפתח מוצפן</button>
+                    <button type="button" id="btn-test-conn" class="btn secondary">⚡ בדוק חיבור לספק</button>
+                    <button type="button" id="btn-close-secrets" class="btn secondary">סגור</button>
+                </div>
+            </form>
+            <div id="secrets-status-list" class="status-list"></div>
+        </div>
+    </div>
+
+    <div id="toast-box" class="toast hidden" role="status" aria-live="polite"></div>
+    <script src="/static/app.js"></script>
+</body>
+</html>
