@@ -2,30 +2,28 @@ import time
 import pyautogui
 
 wait_time = 300  # 5 minutes
-press_time = 2    
- 
+press_time = 2
+
 print("Scrolling script is running!\n")
 
 count = 0
 
 while True:
-    
     try:
         time.sleep(wait_time)
-        
-        print(f"Starting a new pressing sequence...")
+
+        print("Starting a new pressing sequence...")
 
         count += 1
-        
+
         end_time = time.time() + press_time
-        
+
         while time.time() < end_time:
-            pyautogui.press('pagedown')
+            pyautogui.press("pagedown")
             time.sleep(0.01)
-        pyautogui.press("up", presses=17, interval=0.001)      
+        pyautogui.press("up", presses=17, interval=0.001)
         print("The pressing round has ended successfully. Returning to standby mode.")
-        print(f'-- {count} -- sequences by now\n')
-        
+        print(f"-- {count} -- sequences by now\n")
 
     except Exception as e:
         print(f"Error: {e}")

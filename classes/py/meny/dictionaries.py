@@ -1,3 +1,4 @@
+# מילון התחלתי
 college = {
     "Computer Science": {
         "Class A": [
@@ -31,14 +32,14 @@ college = {
     }
 }
 
-def add_department(college, department_name):
+def add_department(college: dict, department_name: str) -> None:
     if department_name not in college:
         college[department_name] = {}
         print("\nDepartment added successfully!")
         return
     print("\nDepartment already exists!")
 
-def add_class(college, department_name, class_name):
+def add_class(college: dict, department_name: str, class_name: str) -> None:
     if department_name not in college:
         print("\nError!\nValues not valid")
         return
@@ -48,31 +49,30 @@ def add_class(college, department_name, class_name):
         return
     print("\nClass already exists!")
 
-def add_student(college, department_name, class_name, student_name, grades):
+def add_student(college: dict, department_name: str, class_name: str, student_name: str, grades: dict) -> None:
     if department_name not in college or class_name not in college[department_name]:
         print("\nError!\nValues not valid")
         return
     college[department_name][class_name].append({"name": student_name, "grades": grades})
     print("\nStudent added successfully!")
 
-def calculate_student_average(student):
+def calculate_student_average(student: dict) -> float:
     if not student or not student["grades"]:
         return 0.0
     total = 0
-    for grade in list(student["grades"].values()):
+    for grade in student["grades"].values():
         total += grade
     return total/len(student["grades"])
 
-def calculate_class_average(class_students):
+def calculate_class_average(class_students: list) -> float:
     if not class_students:
         return 0.0
     total = 0
     for student in class_students:
         total += calculate_student_average(student)
-
     return total/len(class_students)
 
-def calculate_department_average(department_classes):
+def calculate_department_average(department_classes: dict) -> float:
     if not department_classes:
         return 0.0
     total = 0
@@ -83,27 +83,25 @@ def calculate_department_average(department_classes):
         for student in students_class:
             count += 1
             total += calculate_student_average(student)
-    
     return total/count if count > 0 else 0.0
 
-def get_student_grades():
+def get_student_grades() -> dict:
     result = {}
     while True:
         try:
             result[input("Enter subject: ")] = int(input("\nEnter grade: "))
             selection = input("\nDo you want to enter another grade? (y/n): ").lower()
             while selection not in ["y", "n"]:
-                print('Error!')
-                print("Please enter 'y' or 'n'")
+                print("Error! Please enter 'y' or 'n'")
                 selection = input("\nDo you want to enter another grade? (y/n): ").lower()
             if selection == "n":
                 break
         except Exception as e:
             print("\nSomthing went wrong")
-            print(f'Error: {e.__repr__()}')
+            print(f'Error: {e}')
     return result
 
-def menu():
+def menu() -> None:
     def print_menu():
         print("\nWELCOME!\n")
         print("Enter 1 to add a department\nEnter 2 to add a class to a department\nEnter 3 to add a student to a class\nEnter 4 to calculate a student's average\nEnter 5 to calculate a class's average\nEnter 6 to calculate a department's average\nEnter 7 to exit")

@@ -1,0 +1,46 @@
+#root {
+  background-color: rgb(85, 126, 126);
+  align-items: center;
+  justify-content: center;
+}
+
+.cont {
+  background-color: rgb(211, 255, 255);
+  box-shadow: 0 0 100px rgb(173, 235, 239);
+  width: 400px;
+  padding: 20px 0;
+  border-radius: 30px;
+}
+
+.selection {
+  background-color: rgb(211, 255, 255);
+  padding: 30px 0;
+  justify-self: center;
+  display: flex;
+  width: 300px;
+  justify-content: space-between;
+}
+
+span {
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(24, 75, 75);
+}
+
+input,
+select,
+.result {
+  box-shadow: 0 0 10px rgb(127, 189, 214) inset;
+  color: rgb(22, 76, 90);
+  background-color: rgb(169, 211, 211);
+  height: 28px;
+  width: 200px;
+  border: none;
+  border-radius: 10px;
+}
+
+p {
+  font-size: 22px;
+  color: rgb(60, 88, 96);
+  font-weight: 500;
+}

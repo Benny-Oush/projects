@@ -1,0 +1,20 @@
+#root {
+    user-select: none;
+    box-sizing: border-box;
+    background-color: rgb(255, 246, 235);
+}
+
+.cont {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px; 
+    align-items: center;
+}
+
+.circle {
+    transition: 0.3s;
+    justify-self: center;
+    height: 200px;
+    width: 200px;
+}

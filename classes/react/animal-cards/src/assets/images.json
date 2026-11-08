@@ -1,0 +1,183 @@
+[
+  {
+    "id": "img0",
+    "type": "duck",
+    "img": "http://random-d.uk/api/235.jpg"
+  },
+  {
+    "id": "img1",
+    "type": "duck",
+    "img": "http://random-d.uk/api/388.JPG"
+  },
+  {
+    "id": "img2",
+    "type": "fox",
+    "img": "https://randomfox.ca/images/114.jpg"
+  },
+  {
+    "id": "img3",
+    "type": "dog",
+    "img": "https://random.dog/824745ce-712d-4085-8fbc-4ec6b8447b8e.jpg"
+  },
+  {
+    "id": "img4",
+    "type": "dog",
+    "img": "https://random.dog/52e98425-4500-47c5-9472-4c63320bf496.jpg"
+  },
+  {
+    "id": "img5",
+    "type": "fox",
+    "img": "https://randomfox.ca/images/91.jpg"
+  },
+  {
+    "id": "img6",
+    "type": "fox",
+    "img": "https://randomfox.ca/images/90.jpg"
+  },
+  {
+    "id": "img9",
+    "type": "duck",
+    "img": "http://random-d.uk/api/243.jpg"
+  },
+  {
+    "id": "img10",
+    "type": "duck",
+    "img": "http://random-d.uk/api/490.JPG"
+  },
+  {
+    "id": "img11",
+    "type": "duck",
+    "img": "http://random-d.uk/api/502.JPG"
+  },
+  {
+    "id": "img13",
+    "type": "fox",
+    "img": "https://randomfox.ca/images/45.jpg"
+  },
+
+  {
+    "id": "img15",
+    "type": "fox",
+    "img": "https://randomfox.ca/images/100.jpg"
+  },
+  {
+    "id": "img16",
+    "type": "fox",
+    "img": "https://randomfox.ca/images/107.jpg"
+  },
+  {
+    "id": "img17",
+    "type": "dog",
+    "img": "https://random.dog/4f1182b4-d820-4ba6-a33a-c86b5c2a2372.jpg"
+  },
+  {
+    "id": "img18",
+    "type": "duck",
+    "img": "http://random-d.uk/api/436.JPG"
+  },
+  {
+    "id": "img19",
+    "type": "duck",
+    "img": "http://random-d.uk/api/362.jpg"
+  },
+  {
+    "id": "img20",
+    "type": "duck",
+    "img": "http://random-d.uk/api/195.jpg"
+  },
+  {
+    "id": "img21",
+    "type": "fox",
+    "img": "https://randomfox.ca/images/88.jpg"
+  },
+  {
+    "id": "img22",
+    "type": "duck",
+    "img": "http://random-d.uk/api/27.gif"
+  },
+  {
+    "id": "img23",
+    "type": "dog",
+    "img": "https://random.dog/2f7160d2-03fe-49cb-8a97-1d0611508746.jpg"
+  },
+  {
+    "id": "img24",
+    "type": "duck",
+    "img": "http://random-d.uk/api/552.JPG"
+  },
+  {
+    "id": "img25",
+    "type": "dog",
+    "img": "https://random.dog/c5421793-3bfc-4f58-aae2-4c573100f162.jpg"
+  },
+  {
+    "id": "img26",
+    "type": "duck",
+    "img": "http://random-d.uk/api/65.jpg"
+  },
+  {
+    "id": "img27",
+    "type": "fox",
+    "img": "https://randomfox.ca/images/120.jpg"
+  },
+  {
+    "id": "img28",
+    "type": "dog",
+    "img": "https://random.dog/fa14cf36-4f3e-4e88-a512-a10f1d4f1be5.JPG"
+  },
+  {
+    "id": "img29",
+    "type": "duck",
+    "img": "http://random-d.uk/api/89.jpg"
+  },
+  {
+    "id": "img30",
+    "type": "dog",
+    "img": "https://random.dog/c6f5f13e-1c2c-4779-991e-ccaf46441454.gif"
+  },
+  {
+    "id": "img31",
+    "type": "dog",
+    "img": "https://random.dog/80403db6-c7cf-4a1d-8439-420f08758f19.gif"
+  },
+  {
+    "id": "img32",
+    "type": "duck",
+    "img": "http://random-d.uk/api/450.JPG"
+  },
+  {
+    "id": "img33",
+    "type": "fox",
+    "img": "https://randomfox.ca/images/103.jpg"
+  },
+  {
+    "id": "img34",
+    "type": "duck",
+    "img": "http://random-d.uk/api/341.JPG"
+  },
+  {
+    "id": "img35",
+    "type": "fox",
+    "img": "https://randomfox.ca/images/72.jpg"
+  },
+  {
+    "id": "img36",
+    "type": "dog",
+    "img": "https://random.dog/75107177-e4ff-4577-9f5d-e79dd13f59c3.jpg"
+  },
+  {
+    "id": "img37",
+    "type": "duck",
+    "img": "http://random-d.uk/api/181.jpg"
+  },
+  {
+    "id": "img38",
+    "type": "duck",
+    "img": "http://random-d.uk/api/369.jpg"
+  },
+  {
+    "id": "img39",
+    "type": "fox",
+    "img": "https://randomfox.ca/images/3.jpg"
+  }
+]

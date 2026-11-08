@@ -1,0 +1,73 @@
+#root {
+    justify-content: center;
+    background-color: #b4d0f9;
+}
+
+.meeting {
+  padding: 20px;
+  border-bottom: 3px rgb(7, 7, 97) solid;
+  border-radius: 18px;
+  background-color: #547ebd;
+  align-self: center;
+  transition: 0.2s;
+}
+
+.meeting:hover {
+    transition: 0.4s;
+    transform: scale(1.03);
+}
+
+.buttons {
+  margin-top: 18px;
+  display: flex;
+  justify-content: space-around;
+}
+
+button {
+  user-select: none;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  width: 70px;
+  height: 25px;
+  transition: 0.2s;
+}
+
+button:hover {
+  transition: 0.4s;
+  transform: scale(1.1);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.361);
+}
+
+.delete {
+  color: red;
+  background-color: rgb(255, 185, 185);
+}
+
+.delete:hover {
+  color: rgb(108, 0, 0);
+  background-color: #ff8181;
+}
+
+.edit {
+  color: green;
+  background-color: rgb(178, 250, 178);
+}
+
+.edit:hover {
+  color: rgb(4, 109, 4);
+  background-color: rgb(104, 201, 104);
+}
+
+.line {
+  padding: 5px;
+  border-radius: 10px;
+  color: rgb(169, 242, 255);
+  margin-bottom: 5px;
+  border-bottom: 2px solid rgb(186, 211, 254);
+  display: flex;
+  background-color: #02122b;
+  width: 200px;
+  justify-content: space-between;
+}

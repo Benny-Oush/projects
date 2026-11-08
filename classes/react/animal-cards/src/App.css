@@ -1,0 +1,73 @@
+* {
+    user-select: none;
+}
+
+.cards-cont {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(211, 254, 254);
+    gap: 30px;
+    padding: 20px;
+}
+
+.card .heart {
+    font-size: 30px;
+    position: absolute;
+    margin: 10px 0 0 210px;
+    transition: 0.1s;
+}
+
+.card .heart:hover {
+    transform: scale(1.15);
+    transition: 0.3s;
+}
+.card img {
+    height: 280px;
+    width: 240px;
+    object-fit: fill;
+    border-radius: 13px;
+    border: 2px solid black;
+}
+
+.card {
+    background-color: rgb(195, 227, 255);
+    padding: 10px 3px 5px;
+    width: 260px;
+    border: 2px black solid;
+    border-radius: 20px;
+    transition: 0.2s;
+}
+
+.card p {
+    font-size: 20px;
+    color: rgb(81, 81, 111);
+    font-weight: 500;
+}
+
+.card:hover {
+    transform: scale(1.06);
+    transition: 0.4s;
+}
+
+.nuv {
+    background-color: rgb(74, 74, 223);
+    display: flex;
+    gap: 30px;
+    justify-content: space-evenly;
+    height: 70px;
+    align-items: center;
+}
+.nuv .animal {
+    color: rgb(18, 119, 214);
+    font-size: 20px;
+    background-color: lightblue;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
+.nuv .animal:hover {
+    background-color: rgb(167, 239, 175);
+}
