@@ -1,7 +1,9 @@
 .idea/
 target/
 .vscode/
-
+node_modules/
+.vs/
+.DS_Store
 
 # Secrets
 **/.env
