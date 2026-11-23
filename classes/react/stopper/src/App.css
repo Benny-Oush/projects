@@ -1,0 +1,103 @@
+#root {
+  background-color: rgb(215, 187, 242);
+  justify-content: center;
+}
+
+.switch {
+  background-color: blueviolet;
+  border: none;
+  border-radius: 25px;
+  height: 50px;
+  width: 160px;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 20px;
+  padding: 10px;
+  transition: 0.2s;
+}
+
+.switch:hover {
+  transition: 0.6s;
+  transform: scale(1.2);
+  background-color: rgb(110, 31, 184);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.548);
+}
+
+.clock {
+  margin-top: 20px;
+  background-color: rgb(178, 106, 245);
+  width: 350px;
+  height: 170px;
+  border-radius: 45px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.578);
+  font-size: 60px;
+  justify-self: center;
+  align-content: center;
+  color: white;
+}
+
+.stopper {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.578);
+  margin-top: 20px;
+  color: white;
+  background-color: rgb(178, 106, 245);
+  font-size: 55px;
+  justify-content: center;
+  justify-self: center;
+  align-content: center;
+  border-radius: 40px;
+  flex-direction: column;
+  display: flex;
+  width: 300px;
+  height: 230px;
+}
+
+.buttons {
+  margin-top: 45px;
+  margin-bottom: -30px;
+  align-self: center;
+  display: flex;
+  gap: 20px;
+  button {
+    height: 50px;
+    width: 70px;
+    font-size: 25px;
+    border-radius: 10px;
+    border: none;
+    transition: 0.2s;
+  }
+  button:hover:enabled {
+    transition: 0.4s;
+    transform: scale(1.2);
+    background-color: rgb(209, 208, 208);
+  }
+}
+
+.timer {
+  .buttons {
+    margin-top: 60px;
+    margin-bottom: -15px;
+  }
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.578);
+  justify-items: center;
+  height: 280px;
+  width: 350px;
+  margin-top: 20px;
+  color: white;
+  background-color: rgb(178, 106, 245);
+  font-size: 75px;
+  justify-content: center;
+  justify-self: center;
+  align-content: center;
+  border-radius: 50px;
+  button {
+    margin-bottom: -25px;
+    font-size: 23px;
+    width: 50px;
+    height: 40px;
+  }
+}
+
+.sep {
+  color: black;
+}

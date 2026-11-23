@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require('cors')
 const meetingsRouter = require("./routes/meetings.js");
 
 const mongoURL = "mongodb://localhost:27017/meetings";
@@ -7,6 +8,7 @@ mongoose.connect(mongoURL);
 
 const app = express();
 
+app.use(cors())
 app.use(express.json());
 
 app.use("/meeting", meetingsRouter);

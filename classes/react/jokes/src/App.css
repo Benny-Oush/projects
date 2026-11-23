@@ -1,0 +1,205 @@
+#root {
+  background-image: url("./assets/Gemini_Generated_Image_kzr3kfkzr3kfkzr3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-container {
+  top: 0;
+  position: fixed;
+  width: 100vw;
+  z-index: 9999;
+}
+
+.menu {
+  height: 90px;
+  background-color: rgba(44, 61, 130, 0.324);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 20px black;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 180px;
+  button {
+    font-weight: 600;
+    height: 50px;
+    width: 100px;
+    align-self: center;
+    font-size: 17px;
+    border: none;
+    border-radius: 8px;
+    transition: 0.2s;
+    background-color: rgb(102, 102, 238);
+    color: rgb(239, 251, 255);
+  }
+  button:hover:enabled {
+    background-color: rgb(208, 239, 250);
+    color: rgb(27, 27, 117);
+    transition: 0.3s;
+    border-radius: 25px;
+  }
+}
+
+.main {
+  background-color: rgb(255, 255, 255);
+  width: 460px;
+  height: 250px;
+  align-content: space-evenly;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.358);
+  h1 {
+    color: rgb(0, 0, 141);
+    margin-bottom: 50px;
+  }
+  span {
+    color: rgb(66, 69, 104);
+  }
+}
+
+.brows {
+  margin-top: -30px;
+  padding: 15px;
+  background-color: white;
+  height: 250px;
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.374);
+  justify-content: center;
+  span {
+    color: black;
+    width: 370px;
+    font-size: 25px;
+    align-self: center;
+    line-height: 1.7;
+  }
+  .brows-buttons {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.477);
+    background-color: rgba(172, 170, 255, 0.493);
+    backdrop-filter: blur(5px);
+    padding: 15px;
+    border-radius: 25px;
+    width: 450px;
+    position: fixed;
+    margin-top: 380px;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    button {
+      background-color: rgb(91, 91, 249);
+      height: 40px;
+      width: 130px;
+      border: none;
+      border-radius: 15px;
+      font-size: 18px;
+      color: rgb(238, 251, 255);
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    button:hover:enabled {
+      transition: 0.3s;
+      transform: scale(1.05);
+      background-color: rgb(68, 68, 192);
+    }
+  }
+  .like {
+    font-size: 25px;
+  }
+}
+
+.liked {
+  margin-top: 140px;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.joke {
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.395);
+  background-color: white;
+  height: 200px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  align-content: center;
+}
+.remove {
+  position: absolute;
+  margin-bottom: -190px;
+  font-weight: 600;
+  width: 100px;
+  height: 34px;
+  align-self: center;
+  border: none;
+  border-radius: 15px;
+  background-color: rgb(255, 205, 205);
+  color: rgb(120, 1, 1);
+  transition: 0.2s;
+}
+.remove:hover {
+  background-color: rgb(255, 171, 171);
+  color: #760d0d;
+  transition: 0.3s;
+}
+
+.translate {
+  width: 80px;
+  height: 38px;
+  position: fixed;
+  align-self: flex-end;
+  margin-bottom: 210px;
+  border: none;
+  border-radius: 25px;
+  transition: 0.2s;
+  font-weight: 600;
+  color: rgb(22, 22, 151);
+  background-color: white;
+}
+
+.translate:hover:enabled {
+  transition: 0.3s;
+  background-color: rgb(230, 230, 230);
+}
+
+.liked-translate {
+  position: absolute;
+  margin-top: 8px;
+  margin-right: -20px;
+}
+.notice {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.395);
+  padding: 5px;
+  border-radius: 25px;
+  font-size: 15px;
+  position: fixed;
+  background-color: rgba(211, 203, 255, 0.555);
+  backdrop-filter: blur(5px);
+  color: rgb(0, 0, 0);
+  bottom: 0;
+  left: 0;
+  margin: 7px;
+}

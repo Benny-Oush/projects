@@ -33,12 +33,12 @@ class Stack:
 def check_brackets(equation: str) -> bool:
     brackets_stack = Stack()
     sets = {")": "(", "]": "[", "}": "{"}
-    for char in equation:
+    for i, char in enumerate(equation):
         if char in "([{":
             brackets_stack.push(char)
         elif char in ")]}" and sets[char] != brackets_stack.pop():
-            return False
-    return brackets_stack.is_empty()
+            return (False, i)
+    return (True, None) if brackets_stack.is_empty() else (False, len(equation) - 1)
 
 
 class ScoreCard:
@@ -67,6 +67,7 @@ class ScoreCard:
             and all(score >= 60 for score in self.scores)
         )
 
+# לא נבדק האם שני מופעים חולקים את אותם ציונים כיוון שאין היגיון בדרישה זו. אין שום מניעה שלשני תלמידים יהיו ציונים זהים.
 
 def best_card(cards):
     if not cards:
@@ -114,3 +115,101 @@ def eval_postfix(tokens):
         print(e)
 
 
+class UndoCounter:
+    def __init__(self, start: int = 0) -> None:
+        if not isinstance(start, int) or isinstance(start, bool) or start < 0:
+            raise ValueError("start must be an int and greater than 0")
+        self.value = start
+        self.history = []
+
+    def change(self, delta: int) -> bool:
+        if not isinstance(delta, int) or isinstance(delta, bool) or delta == 0:
+            raise ValueError("delta must be an int and can not be 0")
+        if self.value + delta < 0:
+            return False
+        self.history.append(self.value)
+        self.value += delta
+        return True
+
+    def undo(self) -> bool:
+        if not self.history:
+            return False
+        self.value = self.history.pop()
+        return True
+
+    def history_size(self):
+        return len(self.history)
+
+    def apply_batch(self, deltas: list[int]) -> bool:
+        if not isinstance(deltas, list) or not deltas:
+            return False
+        tmp_value = self.value
+        for delta in deltas:
+            if delta == 0 or not isinstance(delta, int) or isinstance(delta, bool):
+                return False
+            tmp_value += delta
+            if tmp_value < 0:
+                return False
+        self.history.append(self.value)
+        self.value = tmp_value
+        return True
+
+
+def check_UndoCounter_class():
+    counter = UndoCounter(6)
+    print(counter.value)
+    print(counter.change(-15))  
+    print(counter.value)
+    print(counter.apply_batch([3, -15, 20]))
+    print(counter.value)
+    print(counter.change(8))
+    print(counter.value)
+    print(counter.undo())
+    print(counter.value)
+    print(counter.apply_batch([2, -2]))
+    print(counter.value)
+
+def is_stack_permutation(incoming, outgoing):
+    if len(incoming) != len(outgoing):
+        return False
+    stack = []
+    out_i = 0
+    for item in incoming:
+        stack.append(item)
+        while stack and stack[-1] == outgoing[out_i]:
+            stack.pop()
+            out_i += 1
+    return len(stack) == 0
+
+# מכיוון שאין כפילויות ברשימות, הקרון שנמצא כרגע בראש המחסנית הוא האיבר היחיד שיכול לספק את הדרישה הנוכחית בסדר היציאה
+
+def to_base(n, base):
+    if type(n) is not int or type(base) is not int:
+        raise ValueError("n and base must be exact integers")
+    if n < 0 or not (2 <= base <= 16):
+        raise ValueError("n can not be negative and base must be between 2 and 16")
+    if n == 0:
+        return "0"
+    digits_map = "0123456789ABCDEF"
+    stack = []
+    while n > 0:
+        remainder = n % base
+        stack.append(digits_map[remainder])
+        n //= base
+    result = []
+    while stack:
+        result.append(stack.pop())
+
+    return "".join(result)
+
+# כל מספר מורכב מקבוצות של הבסיס ועוד שארית בודדת. כשמחלקים בבסיס בפעם הראשונה, כל הקבוצות מתחלקות בשלמותן, ומה שנשאר הוא רק היחידות הבודדות - כלומר הספרה הימנית ביותר. בכל חלוקה נוספת נחשפת הספרה הבאה משמאל, ולכן המחסנית הופכת את הסדר חזרה לכתיבה רגילה משמאל לימין.
+
+# מעקב ידני (45 לבסיס 2):
+# 45 חלקי 2 = 22, שארית 1. מחסנית: 1
+# 22 חלקי 2 = 11, שארית 0. מחסנית: 1, 0
+# 11 חלקי 2 = 5, שארית 1. מחסנית: 1, 0, 1
+# 5 חלקי 2 = 2, שארית 1. מחסנית: 1, 0, 1, 1
+# 2 חלקי 2 = 1, שארית 0. מחסנית: 1, 0, 1, 1, 0
+# 1 חלקי 2 = 0, שארית 1. מחסנית: 1, 0, 1, 1, 0, 1
+
+# שליפה מהמחסנית מהסוף להתחלה נותנת: 101101.

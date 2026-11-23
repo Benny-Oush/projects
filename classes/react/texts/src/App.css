@@ -1,0 +1,52 @@
+.cont {
+  padding: 20px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: rgb(255, 246, 237);
+}
+
+.text {
+  padding: 10px;
+  border-radius: 10px;
+  color: rgb(44, 38, 42);
+  display: flex;
+  gap: 20px;
+}
+
+.focus {
+    padding: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: rgb(104, 165, 240);
+}
+
+.focus-text {
+    color: black;
+    width: 500px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.buttons {
+    display: flex;
+    gap: 30px;
+}
+
+button {
+    background-color: rgb(0, 0, 160);
+    border: none;
+    width: 70px;
+    height: 30px;
+    border-radius: 15px;
+    color: rgb(158, 231, 255);
+    transition: 0.2s;
+}
+
+button:hover {
+    transition: 0.4s;
+    transform: scale(1.2);
+}

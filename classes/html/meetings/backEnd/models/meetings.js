@@ -30,7 +30,6 @@ const schema = new mongoose.Schema({
   address: {
     type: String,
     minLength: 5,
-    required: [true, "Meeting address required"],
   },
 });
 

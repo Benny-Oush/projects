@@ -1,0 +1,94 @@
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+#root {
+  user-select: none;
+  justify-content: center;
+  background-color: rgb(252, 220, 255);
+}
+
+.cont {
+  .c {
+    height: 52px;
+  }
+  button {
+    font-size: 20px;
+    font-family: "Segment7", monospace;
+    border: 1px solid rgb(47, 80, 122);
+    border-bottom: 2px solid rgb(26, 23, 79);
+    border-right: 2px solid rgb(105, 105, 177);
+    border-radius: 5px;
+    width: 60px;
+    height: 40px;
+  }
+  align-self: center;
+  background-color: rgb(107, 44, 166);
+  padding: 20px 10px;
+  border-radius: 13px;
+  border-bottom: 4px solid rgb(60, 1, 60);
+  border-right: 4px solid rgb(221, 160, 221);
+}
+
+.row {
+  display: flex;
+}
+
+@font-face {
+  font-family: "Segment7";
+  src: url("./assets/digital-font/DigitalNormal-xO6j.otf");
+}
+
+.result {
+  font-family: "Segment7", monospace;
+  border-bottom: 2px rgb(7, 51, 7) solid;
+  border-right: 2px rgb(202, 219, 202) solid;
+  border-radius: 5px;
+  align-content: center;
+  color: rgb(54, 52, 52);
+  font-size: 24px;
+  width: 178px;
+  height: 50px;
+  background-color: rgb(135, 186, 146);
+  text-align: right;
+}
+
+.exercise {
+  font-size: 18px;
+  background-color: rgb(244, 171, 233);
+  padding: 20px;
+  align-self: center;
+  border-radius: 20px;
+  border-bottom: purple 4px solid;
+  border-right: 4px rgb(215, 163, 227) solid;
+  width: 250px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  button {
+    height: 40px;
+    width: 100px;
+    transition: 0.2s;
+    background-color: rgb(161, 86, 231);
+    border: none;
+    border-radius: 15px;
+    color: rgb(255, 255, 255);
+  }
+  button:enabled:hover {
+    background-color: blueviolet;
+    transform: scale(1.1);
+    transition: 0.4s;
+  }
+  input {
+    width: 120px;
+    height: 60px;
+    justify-items: center;
+    border-radius: 10px;
+    border: 2px purple solid;
+    background-color: rgb(199, 162, 234);
+    color: black;
+    font-size: 19px;
+  }
+}
