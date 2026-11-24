@@ -40,7 +40,7 @@ body::-webkit-scrollbar {
     user-select: none;
     font-weight: 600;
     height: 50px;
-    width: 100px;
+    width: 110px;
     align-self: center;
     font-size: 17px;
     border: none;
@@ -50,7 +50,6 @@ body::-webkit-scrollbar {
   }
   button:hover:enabled {
     cursor: pointer;
-    color: rgb(0, 33, 134);
     transition: 0.3s;
     border-radius: 25px;
   }
@@ -101,8 +100,16 @@ body::-webkit-scrollbar {
     margin-top: 380px;
     align-self: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     gap: 30px;
+    
+    .prev {
+      width: 50px;
+      font-size: 28px;
+    }
+    .prev:disabled {
+      background-color: gray;
+    }
     button {
       background-color: rgb(91, 91, 249);
       height: 40px;

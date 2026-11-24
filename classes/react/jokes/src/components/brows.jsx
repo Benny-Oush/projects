@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getRandomJoke } from "../utils/jokes.js";
+import { getRandomJoke, getJokeById } from "../utils/jokes.js";
 import { addId, removeId, getAllLikedIds } from "../utils/storage.js";
 import { translate } from "../utils/translation.js";
 import { BookmarkIcon } from "../assets/jsx-assets/bookmark.jsx";
@@ -11,6 +11,23 @@ function Brows() {
   const [liked, setLiked] = useState(false);
   const [translateResult, setTranslateResult] = useState("");
   const [showTranslated, setShowTranslated] = useState(false);
+  const [showPrev, setShowPrev] = useState(false);
+  const [idStack, setIdStack] = useState([]);
+
+  const getPrevJokeId = () => {
+    if (idStack.length > 0) {
+      const tmp = idStack.slice();
+      const prev = tmp.pop();
+      setIdStack(tmp);
+      return prev;
+    }
+  };
+
+  const addNewPrevId = (id) => {
+    const tmp = idStack.slice();
+    tmp.push(id);
+    setIdStack(tmp);
+  };
 
   const onTranslateClick = async () => {
     try {
@@ -28,11 +45,19 @@ function Brows() {
     async function fetchJoke() {
       let newJoke;
       try {
-        newJoke = await getRandomJoke();
-        setCurrentJoke(newJoke);
+        if (showPrev) {
+          newJoke = await getJokeById(getPrevJokeId());
+        } else {
+          newJoke = await getRandomJoke();
+          if (currentJoke) {
+            addNewPrevId(currentJoke.id);
+          }
+        }
       } catch (error) {
         console.error(`Joke Fatching failed: ${error}`);
       } finally {
+        setCurrentJoke(newJoke);
+        setShowPrev(false);
         setLoading(false);
         setLiked(!newJoke ? false : getAllLikedIds().includes(newJoke.id));
       }
@@ -60,6 +85,23 @@ function Brows() {
               : translateResult}
         </span>
         <div className="brows-buttons">
+          <button
+          className="prev"
+            disabled={loading || idStack.length === 0}
+            onClick={() => {
+              setNextBool((prev) => {
+                if (idStack.length > 0) {
+                  setShowPrev(true);
+                }
+                return !prev;
+              });
+              setTranslateResult("");
+              setShowTranslated(false);
+              setLoading(true);
+            }}
+          >
+            ↩
+          </button>
           <button
             disabled={loading}
             onClick={() => {
