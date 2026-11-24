@@ -1,6 +1,6 @@
 # Dad Jokes
 
-A React web app for browsing dad jokes, translating them into Hebrew, and saving favorites in the browser.
+A single-page React app for browsing dad jokes, translating them into Hebrew, and keeping a personal list of favorites in the browser.
 
 ## Features
 
@@ -9,10 +9,12 @@ A React web app for browsing dad jokes, translating them into Hebrew, and saving
 - Saves favorite jokes in `localStorage`, so they remain available after a page refresh.
 - Lets users remove favorites or translate them from the Favorites page.
 - Displays loading feedback while a joke or translation is being fetched.
+- Uses client-side routes for the Home, Browse, and Favorites pages.
 
 ## Tech Stack
 
 - React 19
+- React Router DOM
 - Vite
 - JavaScript (ES modules)
 - CSS
@@ -39,6 +41,14 @@ pnpm dev
 
 Vite will print the local development URL in the terminal.
 
+## Pages
+
+| Route | Description |
+| --- | --- |
+| `/` | Welcome page. |
+| `/brows` | Shows a random joke, with translation and favorite controls. |
+| `/favorites` | Displays the jokes saved by the user. |
+
 ## Available Scripts
 
 | Command | Description |
@@ -52,10 +62,10 @@ Vite will print the local development URL in the terminal.
 
 ```text
 src/
-├── assets/       # Background image and SVG/JSX assets
-├── components/   # Pages and reusable UI components
+├── assets/       # Background image and bookmark icon
+├── components/   # Routed pages and reusable UI components
 ├── utils/        # API, translation, and localStorage helpers
-├── App.jsx       # Page selection and application layout
+├── App.jsx       # Router configuration
 └── main.jsx      # React entry point
 ```
 
@@ -64,7 +74,17 @@ src/
 - Joke data comes from the [icanhazdadjoke API](https://icanhazdadjoke.com/api).
 - Translation requests use Google Translate's public endpoint.
 - Favorite joke IDs are stored locally under the `liked` key in `localStorage`.
+- When a fetched joke is already saved, its bookmark is shown as active.
 
 ## Notes
 
 Translations can affect wordplay and punchlines, so the original English version is always available with one click.
+
+## Quality Checks
+
+```bash
+pnpm lint
+pnpm build
+```
+
+The first command checks code quality with ESLint; the second creates a production-ready build.

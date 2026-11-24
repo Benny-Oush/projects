@@ -1,24 +1,29 @@
 import { useEffect, useState } from "react";
 import { getJokeById } from "../utils/jokes";
-import { removeId } from "../utils/storage";
+import { removeId, getAllLikedIds } from "../utils/storage";
 import { translate } from "../utils/translation.js";
 
 function Joke({ jokeObj, setGetJokesBool }) {
   const [translateResult, setTranslateResult] = useState("");
   const [showTranslated, setShowTranslated] = useState(false);
-  const [loading, setLoading] = useState(false)
-
+  const [loading, setLoading] = useState(false);
   const onTranslateClick = async () => {
-    setLoading(true)
-    if (!showTranslated && !translateResult) {
-      setTranslateResult(await translate(jokeObj.joke));
+    try {
+      if (!showTranslated && !translateResult) {
+        setLoading(true);
+        setTranslateResult(await translate(jokeObj.joke));
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error(`Translation failed: ${error}`);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false)
   };
   return (
     <div className="joke">
       <button
-        disabled={!jokeObj}
+        disabled={!jokeObj || loading}
         className="translate liked-translate"
         onClick={() => {
           setShowTranslated((prev) => !prev);
@@ -27,7 +32,13 @@ function Joke({ jokeObj, setGetJokesBool }) {
       >
         {showTranslated ? "Original" : "Translate"}
       </button>
-      <span>{loading ? "Loading..." : !showTranslated ? jokeObj.joke : translateResult}</span>
+      <span>
+        {loading
+          ? "Loading..."
+          : !showTranslated
+            ? jokeObj.joke
+            : translateResult}
+      </span>
       <button
         className="remove"
         onClick={() => {
@@ -45,11 +56,9 @@ function Liked() {
   const [jokes, setJokes] = useState([]);
   const [getJokesBool, setGetJokesBool] = useState(true);
   useEffect(() => {
-    Promise.all(
-      JSON.parse(localStorage.getItem("liked") || "[]").map((id) =>
-        getJokeById(id),
-      ),
-    ).then((allJokes) => setJokes(allJokes));
+    Promise.all(getAllLikedIds().map((id) => getJokeById(id)))
+      .then((allJokes) => setJokes(allJokes))
+      .catch((error) => console.error(`Joke fatching failed: ${error}`));
   }, [getJokesBool]);
   return (
     <div className="liked">

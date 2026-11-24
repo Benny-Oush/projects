@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { getRandomJoke } from "../utils/jokes.js";
-import { addId, removeId } from "../utils/storage.js";
+import { addId, removeId, getAllLikedIds } from "../utils/storage.js";
 import { translate } from "../utils/translation.js";
-import { BookmarkEmptyIcon, BookmarkFilledIcon } from "../assets/jsx-assets/bookmark.jsx";
+import { BookmarkIcon } from "../assets/jsx-assets/bookmark.jsx";
 
 function Brows() {
   const [nextBool, setNextBool] = useState(false);
@@ -13,16 +13,29 @@ function Brows() {
   const [showTranslated, setShowTranslated] = useState(false);
 
   const onTranslateClick = async () => {
-    setLoading(true);
-    if (!showTranslated && !translateResult) {
-      setTranslateResult(await translate(currentJoke.joke));
+    try {
+      if (!showTranslated && !translateResult) {
+        setLoading(true);
+        setTranslateResult(await translate(currentJoke.joke));
+      }
+    } catch (error) {
+      console.error(`Translation failed: ${error}`);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
   useEffect(() => {
     async function fetchJoke() {
-      setCurrentJoke(await getRandomJoke());
-      setLoading(false);
+      let newJoke;
+      try {
+        newJoke = await getRandomJoke();
+        setCurrentJoke(newJoke);
+      } catch (error) {
+        console.error(`Joke Fatching failed: ${error}`);
+      } finally {
+        setLoading(false);
+        setLiked(!newJoke ? false : getAllLikedIds().includes(newJoke.id));
+      }
     }
     fetchJoke();
   }, [nextBool]);
@@ -30,7 +43,7 @@ function Brows() {
     <div className="cont">
       <div className="brows">
         <button
-          disabled={!currentJoke}
+          disabled={!currentJoke || loading}
           className="translate"
           onClick={() => {
             setShowTranslated((prev) => !prev);
@@ -51,7 +64,6 @@ function Brows() {
             disabled={loading}
             onClick={() => {
               setNextBool((prev) => !prev);
-              setLiked(false);
               setTranslateResult("");
               setShowTranslated(false);
               setLoading(true);
@@ -72,7 +84,7 @@ function Brows() {
               }
             }}
           >
-            {liked ? <BookmarkFilledIcon/> : <BookmarkEmptyIcon/>}
+            {liked ? <BookmarkIcon color="yellow" /> : <BookmarkIcon />}
           </button>
         </div>
       </div>

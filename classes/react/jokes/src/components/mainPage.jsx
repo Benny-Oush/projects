@@ -1,8 +1,12 @@
 function Main() {
-    return <div className="main">
+  return (
+      <div className="main">
         <h1>Welcome!</h1>
-        <span>You can enjoy <s>bad</s> dad jokes here!</span>
-    </div>
+        <span>
+          You can enjoy <s>bad</s> dad jokes here!
+        </span>
+      </div>
+  );
 }
 
-export default Main
+export default Main;

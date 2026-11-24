@@ -14,4 +14,9 @@ function removeId(id) {
   );
 }
 
-export { addId, removeId };
+function getAllLikedIds() {
+  const ids = JSON.parse(localStorage.getItem("liked"));
+  return ids ? ids : [];
+}
+
+export { addId, removeId, getAllLikedIds };
